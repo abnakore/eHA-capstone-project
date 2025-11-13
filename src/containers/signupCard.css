@@ -1,0 +1,56 @@
+.signup-card {
+    background: var(--color-white);
+    padding: 2rem 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    /* max-width: 420px; */
+    text-align: center;
+}
+
+.signup-header .logo-title {
+    color: var(--color-blue);
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.signup-header .subtitle {
+    color: var(--color-medium-gray);
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+}
+
+.signup-form {
+    text-align: left;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.links {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.85rem;
+}
+
+.links a {
+    color: var(--color-blue);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.links a:hover {
+    color: var(--color-orange);
+    text-decoration: underline;
+}
+
+.form-error {
+    color: var(--color-red);
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+    text-align: center;
+}

@@ -1,0 +1,28 @@
+.nav-item {
+    padding: 0.9rem 1.5rem;
+    display: flex;
+    align-items: center;
+    color: var(--color-medium-gray);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background-color: var(--color-light-blue);
+    color: var(--color-blue);
+    border-left-color: var(--color-blue);
+}
+
+.nav-item i {
+    margin-right: 12px;
+    text-align: center;
+    display: grid;
+    place-items: center;
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+}

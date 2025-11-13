@@ -1,0 +1,31 @@
+.med-item {
+    padding: 1rem;
+    transition: background 0.5s ease;
+}
+
+.med-item:hover {
+    background: var(--color-light-gray);
+}
+
+.med-name {
+    font-size: 15px;
+    /* font-weight: 300; */
+    color: var(--color-dark-gray);
+}
+
+.med-status {
+    color: var(--color-medium-gray);
+    font-size: 0.8rem;
+}
+
+.med-icon {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    background-color: var(--color-light-gray);
+    color: var(--color-blue);
+    font-size: 18px;
+    border-radius: 6px;
+    margin-right: 12px;
+}

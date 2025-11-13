@@ -1,0 +1,309 @@
+/* --- 1. Custom Color and Font Variables --- */
+:root {
+    --color-blue: #1a4b8c;
+    --color-light-blue: #e6f0fa;
+    --color-white: #ffffff;
+    --color-dark-gray: #333333;
+    --color-medium-gray: #666666;
+    --color-light-gray: #f5f5f5;
+    --color-green: #2ecc71;
+    --color-orange: #e67e22;
+    /* Used for alerts/accents */
+    --color-danger: #e74c3c;
+    /* Red for severe warnings */
+    --font-family: 'Poppins', sans-serif;
+}
+
+/* --- 2. Global Styling and Layout --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--color-light-gray);
+    color: var(--color-dark-gray);
+}
+
+.primary-blue-text {
+    color: var(--color-blue);
+    font-weight: 600;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-blue);
+}
+
+/* --- 3. Header Styling (Simulated React Component) --- */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-blue);
+    color: var(--color-white);
+    padding: 15px 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.header-nav a {
+    color: var(--color-white);
+    margin-left: 20px;
+    padding: 5px 0;
+    font-weight: 400;
+    transition: color 0.3s;
+}
+
+.header-nav a.active {
+    border-bottom: 2px solid var(--color-orange);
+    /* Accent color for active state */
+    font-weight: 600;
+}
+
+.user-info {
+    font-size: 0.9rem;
+}
+
+/* --- 4. Main Dashboard Layout (Two-Column Grid) --- */
+.dashboard-layout {
+    display: flex;
+    padding: 30px 40px;
+    gap: 30px;
+    /* Space between sidebar and main content */
+}
+
+.sidebar {
+    width: 300px;
+    /* Fixed width for critical info */
+    flex-shrink: 0;
+}
+
+.main-content {
+    flex-grow: 1;
+}
+
+.page-header {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-dark-gray);
+    margin-bottom: 25px;
+}
+
+/* --- 5. Card and Section Styling --- */
+.card {
+    background-color: var(--color-white);
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    /* Subtle elevation */
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-blue);
+    border-bottom: 1px solid var(--color-light-gray);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.content-section {
+    margin-bottom: 30px;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.section-header h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.view-all-link {
+    font-size: 0.9rem;
+}
+
+/* --- 6. CRITICAL SAFETY DATA Styling --- */
+.safety-group {
+    margin-bottom: 15px;
+}
+
+.group-header {
+    font-size: 1rem;
+    color: var(--color-medium-gray);
+    margin: 20px 0 5px 0;
+    text-transform: uppercase;
+}
+
+.safety-label {
+    font-size: 0.9rem;
+    color: var(--color-medium-gray);
+    display: flex;
+    align-items: center;
+}
+
+.safety-label i {
+    margin-right: 8px;
+    color: var(--color-blue);
+}
+
+.safety-value {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.safety-list {
+    list-style: none;
+}
+
+.danger-item {
+    color: var(--color-danger);
+    /* Red for allergy/severe warnings */
+    font-weight: 600;
+    padding: 5px 0;
+}
+
+.danger-item i {
+    margin-right: 8px;
+}
+
+/* --- 7. Quick Actions Button Styling --- */
+.btn-primary,
+.btn-secondary {
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, opacity 0.3s;
+    border: none;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background-color: var(--color-blue);
+    color: var(--color-white);
+}
+
+.btn-primary:hover {
+    background-color: #153c6e;
+}
+
+.btn-secondary {
+    background-color: var(--color-light-blue);
+    color: var(--color-blue);
+    border: 1px solid var(--color-blue);
+}
+
+.btn-secondary:hover {
+    opacity: 0.9;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.btn-primary i,
+.btn-secondary i {
+    margin-right: 8px;
+}
+
+/* --- 8. Medication Grid Styling --- */
+.medication-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.med-card {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--color-light-blue);
+    /* Subtle background for med cards */
+    border-radius: 6px;
+}
+
+.med-icon {
+    font-size: 1.8rem;
+    color: var(--color-blue);
+    margin-right: 15px;
+}
+
+.med-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--color-blue);
+}
+
+.med-status {
+    font-size: 0.85rem;
+    color: var(--color-medium-gray);
+}
+
+/* --- 9. Recent List Styling (Timeline Preview) --- */
+.recent-list {
+    list-style: none;
+    padding: 0;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--color-light-gray);
+}
+
+.timeline-item:last-child {
+    border-bottom: none;
+}
+
+.item-date {
+    font-size: 0.9rem;
+    color: var(--color-medium-gray);
+    width: 90px;
+    flex-shrink: 0;
+}
+
+.item-type {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-right: 15px;
+    color: var(--color-white);
+    min-width: 80px;
+    text-align: center;
+}
+
+.item-type i {
+    margin-right: 5px;
+}
+
+.lab-type {
+    background-color: var(--color-green);
+    /* Example: Use Green for Lab/OK records */
+}
+
+.visit-type {
+    background-color: var(--color-orange);
+    /* Example: Use Orange for Visit/Action needed */
+}
+
+.item-title {
+    font-weight: 400;
+    color: var(--color-dark-gray);
+}

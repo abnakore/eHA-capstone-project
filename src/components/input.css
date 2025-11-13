@@ -1,0 +1,61 @@
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+    position: relative;
+}
+
+label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-dark-gray);
+    margin-bottom: 5px;
+}
+
+input,
+select {
+    background: var(--color-white);
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--color-blue);
+    outline: none;
+}
+
+.right-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    color: var(--color-medium-gray);
+    cursor: pointer;
+
+    svg {
+        width: 24px;
+        height: 24px;
+    }
+
+}
+
+.has-error input,
+.has-error select {
+    border-color: var(--color-red);
+}
+
+.has-error input:focus,
+.has-error select:focus {
+    border-color: var(--color-red);
+}
+
+.has-error .error-message {
+    color: var(--color-red);
+    font-size: 0.75rem;
+    margin-top: 5px;
+    display: block;
+}

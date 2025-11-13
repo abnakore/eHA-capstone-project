@@ -1,0 +1,100 @@
+{
+  "currentUser": {
+    "user_id": "user-001",
+    "email": "jane.doe@example.com",
+    "first_name": "Jane",
+    "last_name": "Doe",
+    "date_of_birth": "1990-05-20",
+    "blood_type": "O+",
+    "emergency_contact": {
+      "name": "John Doe",
+      "phone": "555-123-4567"
+    }
+  },
+  "criticalSafetyData": [
+    {
+      "id": "safety-001",
+      "type": "Allergy",
+      "value": "Penicillin",
+      "status": "Severe",
+      "associated_record_id": "rec-005"
+    },
+    {
+      "id": "safety-002",
+      "type": "Medication",
+      "value": "Lisinopril (10mg daily)",
+      "status": "Active",
+      "associated_record_id": "rec-002"
+    },
+    {
+      "id": "safety-003",
+      "type": "Condition",
+      "value": "Type 2 Diabetes",
+      "status": "Active",
+      "associated_record_id": "rec-003"
+    }
+  ],
+  "healthRecords": [
+    {
+      "record_id": "rec-001",
+      "event_date": "2024-09-01",
+      "record_type": "Visit",
+      "title": "Annual Physical Checkup",
+      "notes": "Saw Dr. Smith for routine exam. Everything normal. Discussed diet changes.",
+      "doctor": "Dr. Sarah Smith, MD",
+      "location": "Primary Care Clinic A",
+      "document_details": {
+        "file_name": "2024_09_01_visit_notes.pdf",
+        "storage_path": "/mock/user-001/doc-001"
+      }
+    },
+    {
+      "record_id": "rec-002",
+      "event_date": "2024-10-15",
+      "record_type": "Medication",
+      "title": "New Prescription: Lisinopril",
+      "notes": "Prescribed by Dr. Chang for newly identified high blood pressure.",
+      "dosage": "10mg",
+      "frequency": "Daily",
+      "document_details": {
+        "file_name": "2024_10_15_rx_lisinopril.pdf",
+        "storage_path": "/mock/user-001/doc-002"
+      }
+    },
+    {
+      "record_id": "rec-003",
+      "event_date": "2024-11-20",
+      "record_type": "Lab",
+      "title": "A1C and Cholesterol Panel",
+      "notes": "Results confirmed pre-diabetic range. Started Metformin. Fasting Glucose: 115 mg/dL.",
+      "lab_name": "City General Labs",
+      "document_details": {
+        "file_name": "2024_11_20_lab_results.pdf",
+        "storage_path": "/mock/user-001/doc-003"
+      }
+    },
+    {
+      "record_id": "rec-004",
+      "event_date": "2025-01-05",
+      "record_type": "Imaging",
+      "title": "X-Ray of Right Ankle",
+      "notes": "Slight sprain after falling. No fracture confirmed. Referred to physical therapy.",
+      "imaging_center": "Advanced Radiology Center",
+      "document_details": {
+        "file_name": "2025_01_05_ankle_xray.png",
+        "storage_path": "/mock/user-001/doc-004"
+      }
+    },
+    {
+      "record_id": "rec-005",
+      "event_date": "2010-03-10",
+      "record_type": "Allergy_Report",
+      "title": "Confirmed Penicillin Allergy",
+      "notes": "Patient experienced severe rash during childhood treatment.",
+      "document_details": {
+        "file_name": "2010_03_10_allergy_test.pdf",
+        "storage_path": "/mock/user-001/doc-005"
+      }
+    }
+  ]
+}
