@@ -1,9 +1,16 @@
 .critical-card .card-header {
     display: flex;
-    align-items: end;
+    align-items: center;
+    justify-content: space-between;
+
     margin-bottom: 1rem;
     border-bottom: 1px solid var(--color-light-gray);
     padding-bottom: 0.5rem;
+}
+
+.critical-card .title-section {
+    display: flex;
+    align-items: end;
 }
 
 .critical-card .card-title {
@@ -20,6 +27,12 @@
     margin-right: 10px;
     color: var(--color-blue);
     font-size: 24px;
+}
+
+.critical-card .add-icon {
+    cursor: pointer;
+    color: var(--color-green);
+    font-size: 18px;
 }
 
 .med-item,
@@ -41,4 +54,11 @@
 .allergy-item:last-child,
 .contact-item:last-child {
     border-bottom: none;
+}
+
+.critical-card .empty-message {
+    text-align: center;
+    color: var(--color-medium-gray);
+    font-size: 0.9rem;
+    padding: 1rem;
 }

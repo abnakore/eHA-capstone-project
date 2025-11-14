@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./dashboard.css";
 
 import { useNavigate } from "react-router-dom";
@@ -9,16 +8,91 @@ import Aside from "../containers/Aside";
 import CriticalCard from "../containers/CriticalCard";
 import MedicationItem from "../components/MedicationItem";
 import AllergyItem from "../components/AllergyItem";
-import EmergencyContactItem from "../components/EmergencyContactItem";
 
 import { FaPills } from "react-icons/fa6";
 import { FaAllergies } from "react-icons/fa";
-import { IoMdCall } from "react-icons/io";
+import { MdSick } from "react-icons/md";
+import TimelineItem from "../components/TimelineItem";
 
 function Dashboard() {
   // get user from context
   const { user, loading } = useUser();
   const navigate = useNavigate();
+
+  // Medications data
+  const medications = [
+    {
+      name: "Lisinopril",
+      dosage: "10mg daily",
+      status: "Active",
+      kind: "tablet",
+    },
+    {
+      name: "Metformin",
+      dosage: "500mg twice daily",
+      status: "Active",
+      kind: "injection",
+    },
+    {
+      name: "Atorvastatin",
+      dosage: "20mg at bedtime",
+      status: "Active",
+      kind: "syrup",
+    },
+  ];
+
+  // Allergy data
+  const allergies = [
+    { name: "Penicillin", level: "Severe" },
+    { name: "Shellfish", level: "Moderate" },
+    { name: "Ibuprofen", level: "Moderate" },
+  ];
+
+  // Current conditions data
+  const currentConditions = [
+    { name: "Type 2 Diabetes", status: "Active" },
+    { name: "Hypertension", status: "Inactive" },
+  ];
+
+  // Health events data
+  const healthEvents = [
+    {
+      date: "Nov 10",
+      type: "lab",
+      title: "Lab Result",
+      description: "LDL: 95 mg/dL (Within normal range)",
+    },
+    {
+      date: "Nov 05",
+      type: "appointment",
+      title: "Doctor Appointment",
+      description: "Annual physical check-up with Dr. Smith.",
+    },
+    {
+      date: "Nov 01",
+      type: "medication",
+      title: "Medication Update",
+      description: "Started Metformin 500mg twice daily.",
+    },
+    {
+      date: "Nov 10",
+      type: "other",
+      title: "Lab Result",
+      description: "LDL: 95 mg/dL (Within normal range)",
+    },
+    {
+      date: "Nov 06",
+      type: "appointment",
+      title: "Doctor Appointment",
+      description: "Annual physical check-up with Dr. Smith.",
+    },
+    {
+      date: "Nov 09",
+      type: "medication",
+      title: "Medication Update",
+      description: "Started Metformin 500mg twice daily.",
+    },
+  ];
 
   // Prevent rendering if user is not loaded yet
   if (loading) {
@@ -42,54 +116,68 @@ function Dashboard() {
           <p>Here's a summary of your health data.</p>
         </div>
 
-        <div class="critical-info">
-          <h2 class="section-title">Critical Information</h2>
+        <div className="critical-info">
+          <h2 className="section-title">Critical Information</h2>
 
           <div className="critical-cards">
             <CriticalCard
               icon={<FaPills />}
               title="Current Medications"
-              items={[
+              items={medications.map((med, index) => (
                 <MedicationItem
-                  name="Lisinopril"
-                  dosage="10mg daily"
-                  status="Active"
-                  kind="tablet"
-                />,
-                <MedicationItem
-                  name="Metformin"
-                  dosage="500mg twice daily"
-                  status="Active"
-                  kind="injection"
-                />,
-                <MedicationItem
-                  name="Atorvastatin"
-                  dosage="20mg at bedtime"
-                  status="Active"
-                  kind="syrup"
-                />,
-              ]}
+                  key={index}
+                  name={med.name}
+                  dosage={med.dosage}
+                  status={med.status}
+                  kind={med.kind}
+                />
+              ))}
             />
             <CriticalCard
               icon={<FaAllergies />}
               title="Allergies"
-              items={[
-                <AllergyItem name="Penicillin" level="Severe" />,
-                <AllergyItem name="Shellfish" level="Moderate" />,
-                <AllergyItem name="Ibuprofen" level="Moderate" />,
-              ]}
+              items={allergies.map((allergy, index) => (
+                <AllergyItem
+                  key={index}
+                  name={allergy.name}
+                  level={allergy.level}
+                />
+              ))}
             />
             <CriticalCard
-              icon={<IoMdCall />}
-              title="Emergency Contacts"
-              items={[
-                <EmergencyContactItem name="Jane Doe" number="+1234567890" />,
-                <EmergencyContactItem
-                  name="Dr. Sarah Miller"
-                  number="+0987654321"
-                />,
-              ]}
+              icon={<MdSick />}
+              title="Current Conditions"
+              items={currentConditions.map((condition, index) => (
+                <AllergyItem
+                  key={index}
+                  name={condition.name}
+                  level={condition.status}
+                />
+              ))}
             />
+          </div>
+        </div>
+
+        <div className="timeline-preview">
+          <h2 className="section-title">
+            Recent Health Events
+            <a href="#">View Full Timeline</a>
+          </h2>
+
+          <div className="card">
+            {/* Reverse the array and take at most 5 events */}
+            {healthEvents
+              .reverse()
+              .slice(0, 5)
+              .map((event, index) => (
+                <TimelineItem
+                  key={index}
+                  date={event.date}
+                  type={event.type}
+                  title={event.title}
+                  description={event.description}
+                />
+              ))}
           </div>
         </div>
       </div>

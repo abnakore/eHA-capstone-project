@@ -1,12 +1,12 @@
 import React from "react";
-import "./emergencyContactItem.css";
+import "./conditionItem.css";
 import { IoMdCall } from "react-icons/io";
 
-function EmergencyContactItem({ name, number }) {
+function ConditionItem({ name, status }) {
   return (
     <div className="contact-item">
       <div className="contact-details">
-        <p className="contact-name">{number}</p>
+        <p className="contact-name">{status}</p>
         <p className="contact-status">{name}</p>
       </div>
       <i className="contact-icon">
@@ -16,4 +16,4 @@ function EmergencyContactItem({ name, number }) {
   );
 }
 
-export default EmergencyContactItem;
+export default ConditionItem;

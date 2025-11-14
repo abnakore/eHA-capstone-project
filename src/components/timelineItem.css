@@ -1,0 +1,62 @@
+.timeline-item {
+    display: flex;
+    padding: 1rem;
+    border-bottom: 1px solid var(--color-light-gray);
+    /* cursor: pointer; */
+}
+
+.timeline-item:hover {
+    background-color: var(--color-light-gray);
+}
+
+.timeline-item:last-child {
+    border-bottom: none;
+}
+
+.timeline-date {
+    width: 80px;
+    color: var(--color-medium-gray);
+    font-size: 0.9rem;
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-title {
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+}
+
+.timeline-description {
+    color: var(--color-medium-gray);
+    font-size: 0.8rem;
+}
+
+.timeline-type {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+}
+
+.type-medication {
+    background-color: var(--color-light-blue);
+    color: var(--color-blue);
+}
+
+.type-appointment {
+    background-color: var(--color-light-green);
+    color: var(--color-green);
+}
+
+.type-lab {
+    background-color: var(--color-light-yellow);
+    color: var(--color-orange);
+}
+
+.type-other {
+    background-color: var(--color-light-gray);
+    color: var(--color-dark-gray);
+}

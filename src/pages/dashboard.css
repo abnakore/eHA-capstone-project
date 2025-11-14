@@ -50,3 +50,14 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.section-title a {
+    font-size: 0.9rem;
+    color: var(--color-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.timeline-preview {
+    margin-bottom: 2.5rem;
+}

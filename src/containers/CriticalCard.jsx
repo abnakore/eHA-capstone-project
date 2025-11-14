@@ -1,15 +1,28 @@
 import React from "react";
+import { FaPlus } from "react-icons/fa6";
 import "./criticalCard.css";
 
-function CriticalCard({ icon, title, items }) {
+function CriticalCard({ icon, title, items, handleAdd }) {
   return (
     <div className="card critical-card">
       <div className="card-header">
-        <i className="icon">{icon}</i>
-        <h3 className="card-title">{title}</h3>
+        <div className="title-section">
+          <i className="icon">{icon}</i>
+          <h3 className="card-title">{title}</h3>
+        </div>
+
+        <i className="icon add-icon" onClick={handleAdd}>
+          <FaPlus />
+        </i>
       </div>
 
-      <div className="card-content">{items && items.map((item) => item)}</div>
+      <div className="card-content"> 
+        {items && items.length > 0 ? (
+          items.map((item) => item)
+        ) : (
+          <p className="empty-message">No items available</p>
+        )}
+      </div>
     </div>
   );
 }
