@@ -3,7 +3,7 @@ import "./aside.css";
 import NavItem from "../components/NavItem";
 import { TbSmartHome } from "react-icons/tb";
 import { LuHistory } from "react-icons/lu";
-import { FaPills } from "react-icons/fa6";
+import { FaPills, FaPlus } from "react-icons/fa6";
 import { FaFileMedical } from "react-icons/fa6";
 import { FaUserMd } from "react-icons/fa";
 import { FaChartLine } from "react-icons/fa6";
@@ -19,11 +19,12 @@ function Aside() {
   const navLinks = [
     { icon: <TbSmartHome />, text: "Dashboard", to: "/dashboard" },
     { icon: <LuHistory />, text: "Timeline", to: "/timeline" },
-    { icon: <FaPills />, text: "Medications", to: "/medications" },
+    { icon: <FaPlus />, text: "Add Record", to: "/add-record" },
+    // { icon: <FaPills />, text: "Medications", to: "/medications" },
     { icon: <FaFileMedical />, text: "Documents", to: "/documents" },
-    { icon: <FaUserMd />, text: "Appointments", to: "/appointments" },
-    { icon: <FaChartLine />, text: "Health Metrics", to: "/health-metrics" },
-    { icon: <RiSettingsFill />, text: "Settings", to: "/settings" },
+    // { icon: <FaUserMd />, text: "Appointments", to: "/appointments" },
+    // { icon: <FaChartLine />, text: "Health Metrics", to: "/health-metrics" },
+    // { icon: <RiSettingsFill />, text: "Settings", to: "/settings" },
   ];
   return (
     <div className="sidebar">

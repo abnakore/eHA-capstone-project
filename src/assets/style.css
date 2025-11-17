@@ -1,309 +1,352 @@
-/* --- 1. Custom Color and Font Variables --- */
-:root {
-    --color-blue: #1a4b8c;
-    --color-light-blue: #e6f0fa;
-    --color-white: #ffffff;
-    --color-dark-gray: #333333;
-    --color-medium-gray: #666666;
-    --color-light-gray: #f5f5f5;
-    --color-green: #2ecc71;
-    --color-orange: #e67e22;
-    /* Used for alerts/accents */
-    --color-danger: #e74c3c;
-    /* Red for severe warnings */
-    --font-family: 'Poppins', sans-serif;
+/* --- Timeline Specific Layout --- */
+.timeline-filters {
+    /* Using the existing sidebar class, but adding a specific name for clarity */
 }
 
-/* --- 2. Global Styling and Layout --- */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+.timeline-feed {
+    /* Using the existing main-content class */
 }
 
-body {
-    font-family: var(--font-family);
-    background-color: var(--color-light-gray);
-    color: var(--color-dark-gray);
+/* --- Filter Card Styling --- */
+.filter-card {
+    position: sticky; /* Keeps the filters visible while scrolling the timeline */
+    top: 20px;
 }
 
-.primary-blue-text {
-    color: var(--color-blue);
-    font-weight: 600;
-}
-
-a {
-    text-decoration: none;
-    color: var(--color-blue);
-}
-
-/* --- 3. Header Styling (Simulated React Component) --- */
-.app-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--color-blue);
-    color: var(--color-white);
-    padding: 15px 40px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.header-logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.header-nav a {
-    color: var(--color-white);
-    margin-left: 20px;
-    padding: 5px 0;
-    font-weight: 400;
-    transition: color 0.3s;
-}
-
-.header-nav a.active {
-    border-bottom: 2px solid var(--color-orange);
-    /* Accent color for active state */
-    font-weight: 600;
-}
-
-.user-info {
-    font-size: 0.9rem;
-}
-
-/* --- 4. Main Dashboard Layout (Two-Column Grid) --- */
-.dashboard-layout {
-    display: flex;
-    padding: 30px 40px;
-    gap: 30px;
-    /* Space between sidebar and main content */
-}
-
-.sidebar {
-    width: 300px;
-    /* Fixed width for critical info */
-    flex-shrink: 0;
-}
-
-.main-content {
-    flex-grow: 1;
-}
-
-.page-header {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--color-dark-gray);
-    margin-bottom: 25px;
-}
-
-/* --- 5. Card and Section Styling --- */
-.card {
-    background-color: var(--color-white);
-    padding: 25px;
-    border-radius: 8px;
+.filter-group {
     margin-bottom: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    /* Subtle elevation */
 }
 
-.card-title {
-    font-size: 1.2rem;
+.filter-group label {
+    display: block;
     font-weight: 600;
-    color: var(--color-blue);
-    border-bottom: 1px solid var(--color-light-gray);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    color: var(--color-dark-gray);
+    font-size: 0.95rem;
 }
 
-.content-section {
+.filter-group input[type="text"], 
+.filter-group input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.date-separator {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    margin: 5px 0;
+    color: var(--color-medium-gray);
+    font-size: 0.8rem;
+}
+
+.apply-btn {
+    margin-top: 5px;
+}
+
+/* --- Timeline Feed Styling --- */
+.timeline-group {
     margin-bottom: 30px;
 }
 
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.section-header h2 {
-    font-size: 1.4rem;
-    font-weight: 600;
-}
-
-.view-all-link {
-    font-size: 0.9rem;
-}
-
-/* --- 6. CRITICAL SAFETY DATA Styling --- */
-.safety-group {
-    margin-bottom: 15px;
-}
-
-.group-header {
-    font-size: 1rem;
-    color: var(--color-medium-gray);
-    margin: 20px 0 5px 0;
-    text-transform: uppercase;
-}
-
-.safety-label {
-    font-size: 0.9rem;
-    color: var(--color-medium-gray);
-    display: flex;
-    align-items: center;
-}
-
-.safety-label i {
-    margin-right: 8px;
+.timeline-date-header {
+    background-color: var(--color-light-blue); /* Light blue separator */
     color: var(--color-blue);
-}
-
-.safety-value {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    margin-top: 2px;
-}
-
-.safety-list {
-    list-style: none;
-}
-
-.danger-item {
-    color: var(--color-danger);
-    /* Red for allergy/severe warnings */
-    font-weight: 600;
-    padding: 5px 0;
-}
-
-.danger-item i {
-    margin-right: 8px;
-}
-
-/* --- 7. Quick Actions Button Styling --- */
-.btn-primary,
-.btn-secondary {
-    padding: 12px;
+    padding: 10px 15px;
     border-radius: 4px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s, opacity 0.3s;
-    border: none;
-    margin-top: 10px;
+    margin-bottom: 15px;
+    position: sticky; /* Makes the month stick while scrolling through its items */
+    top: 80px; /* Below the main header */
+    z-index: 10;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
-.btn-primary {
-    background-color: var(--color-blue);
+.timeline-item-card {
+    display: flex;
+    background-color: var(--color-white);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s;
+}
+
+.timeline-item-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Slight lift on hover */
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: var(--color-white);
-}
-
-.btn-primary:hover {
-    background-color: #153c6e;
-}
-
-.btn-secondary {
-    background-color: var(--color-light-blue);
-    color: var(--color-blue);
-    border: 1px solid var(--color-blue);
-}
-
-.btn-secondary:hover {
-    opacity: 0.9;
-}
-
-.full-width {
-    width: 100%;
-}
-
-.btn-primary i,
-.btn-secondary i {
-    margin-right: 8px;
-}
-
-/* --- 8. Medication Grid Styling --- */
-.medication-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
-
-.med-card {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    background-color: var(--color-light-blue);
-    /* Subtle background for med cards */
-    border-radius: 6px;
-}
-
-.med-icon {
-    font-size: 1.8rem;
-    color: var(--color-blue);
-    margin-right: 15px;
-}
-
-.med-name {
-    font-weight: 600;
-    font-size: 1rem;
-    color: var(--color-blue);
-}
-
-.med-status {
-    font-size: 0.85rem;
-    color: var(--color-medium-gray);
-}
-
-/* --- 9. Recent List Styling (Timeline Preview) --- */
-.recent-list {
-    list-style: none;
-    padding: 0;
-}
-
-.timeline-item {
-    display: flex;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--color-light-gray);
-}
-
-.timeline-item:last-child {
-    border-bottom: none;
-}
-
-.item-date {
-    font-size: 0.9rem;
-    color: var(--color-medium-gray);
-    width: 90px;
+    font-size: 1.2rem;
+    margin-right: 20px;
     flex-shrink: 0;
 }
 
-.item-type {
-    font-size: 0.8rem;
+.blue-bg { background-color: var(--color-blue); }
+.green-bg { background-color: var(--color-green); }
+.orange-bg { background-color: var(--color-orange); }
+
+.card-content {
+    flex-grow: 1;
+}
+
+.card-type {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.card-title {
+    font-size: 1.1rem;
     font-weight: 600;
-    padding: 4px 8px;
-    border-radius: 4px;
-    margin-right: 15px;
-    color: var(--color-white);
-    min-width: 80px;
-    text-align: center;
+    margin-bottom: 5px;
 }
 
-.item-type i {
+.card-subtitle {
+    color: var(--color-medium-gray);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px dashed var(--color-light-gray);
+}
+
+.card-date {
+    color: var(--color-medium-gray);
+    font-size: 0.85rem;
+}
+
+.card-date i {
     margin-right: 5px;
+    color: var(--color-orange);
 }
 
-.lab-type {
-    background-color: var(--color-green);
-    /* Example: Use Green for Lab/OK records */
+.btn-detail {
+    background: none;
+    border: none;
+    color: var(--color-blue);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s;
 }
 
-.visit-type {
-    background-color: var(--color-orange);
-    /* Example: Use Orange for Visit/Action needed */
+.btn-detail:hover {
+    color: var(--color-orange);
 }
 
-.item-title {
-    font-weight: 400;
+.btn-detail i {
+    margin-left: 5px;
+    font-size: 0.7rem;
+}
+
+/* --- Timeline Specific Layout --- */
+.timeline-filters {
+    /* Using the existing sidebar class, but adding a specific name for clarity */
+}
+
+.timeline-feed {
+    /* Using the existing main-content class */
+}
+
+/* --- Filter Card Styling --- */
+.filter-card {
+    position: sticky;
+    /* Keeps the filters visible while scrolling the timeline */
+    top: 20px;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
     color: var(--color-dark-gray);
+    font-size: 0.95rem;
+}
+
+.filter-group input[type="text"],
+.filter-group input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+}
+
+.date-separator {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    margin: 5px 0;
+    color: var(--color-medium-gray);
+    font-size: 0.8rem;
+}
+
+.apply-btn {
+    margin-top: 5px;
+}
+
+/* --- Timeline Feed Styling --- */
+.timeline-group {
+    margin-bottom: 30px;
+}
+
+.timeline-date-header {
+    background-color: var(--color-light-blue);
+    /* Light blue separator */
+    color: var(--color-blue);
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    position: sticky;
+    /* Makes the month stick while scrolling through its items */
+    top: 80px;
+    /* Below the main header */
+    z-index: 10;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.timeline-item-card {
+    display: flex;
+    background-color: var(--color-white);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s;
+}
+
+.timeline-item-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Slight lift on hover */
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-white);
+    font-size: 1.2rem;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.blue-bg {
+    background-color: var(--color-blue);
+}
+
+.green-bg {
+    background-color: var(--color-green);
+}
+
+.orange-bg {
+    background-color: var(--color-orange);
+}
+
+.card-content {
+    flex-grow: 1;
+}
+
+.card-type {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.card-subtitle {
+    color: var(--color-medium-gray);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px dashed var(--color-light-gray);
+}
+
+.card-date {
+    color: var(--color-medium-gray);
+    font-size: 0.85rem;
+}
+
+.card-date i {
+    margin-right: 5px;
+    color: var(--color-orange);
+}
+
+.btn-detail {
+    background: none;
+    border: none;
+    color: var(--color-blue);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.btn-detail:hover {
+    color: var(--color-orange);
+}
+
+.btn-detail i {
+    margin-left: 5px;
+    font-size: 0.7rem;
 }

@@ -1,6 +1,7 @@
 .allergy-item {
     padding: 1rem;
     transition: background 0.5s ease;
+    flex: 1;
 }
 
 .allergy-item.severity-severe:hover {

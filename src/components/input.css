@@ -13,7 +13,8 @@ label {
 }
 
 input,
-select {
+select,
+textarea {
     background: var(--color-white);
     width: 100%;
     padding: 12px;
@@ -24,7 +25,8 @@ select {
 }
 
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
     border-color: var(--color-blue);
     outline: none;
 }

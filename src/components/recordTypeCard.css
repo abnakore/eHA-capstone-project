@@ -1,0 +1,35 @@
+.record-type-option {
+    border: 2px solid var(--color-light-gray);
+    border-radius: 8px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.record-type-option:hover {
+    border-color: var(--color-blue);
+    background-color: var(--color-light-blue);
+}
+
+.record-type-option.selected {
+    border-color: var(--color-blue);
+    background-color: var(--color-light-blue);
+}
+
+.record-type-icon {
+    font-size: 2rem;
+    color: var(--color-blue);
+    margin-bottom: 0.8rem;
+}
+
+.record-type-label {
+    font-weight: 500;
+    color: var(--color-dark-gray);
+}
+
+@media (max-width: 768px) {
+    .record-type-selector {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

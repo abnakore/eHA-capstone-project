@@ -1,8 +1,12 @@
-import React from "react";
-import { FaPlus } from "react-icons/fa6";
+import React, { useState } from "react";
+import { RiEdit2Fill, RiCloseFill } from "react-icons/ri";
+import { FaMinus, FaPlus } from "react-icons/fa6";
 import "./criticalCard.css";
 
-function CriticalCard({ icon, title, items, handleAdd }) {
+function CriticalCard({ icon, title, items }) {
+  // is editting
+  // const [isEdditing, setIsEdditing] = useState(false);
+
   return (
     <div className="card critical-card">
       <div className="card-header">
@@ -11,14 +15,33 @@ function CriticalCard({ icon, title, items, handleAdd }) {
           <h3 className="card-title">{title}</h3>
         </div>
 
-        <i className="icon add-icon" onClick={handleAdd}>
-          <FaPlus />
-        </i>
+        {/* <div className="head-icons">
+          {isEdditing && (
+            <i className="icon edit-icon">
+              <FaPlus />
+            </i>
+          )}
+          <i
+            className="icon edit-icon"
+            onClick={() => setIsEdditing(!isEdditing)}
+          >
+            {isEdditing ? <RiCloseFill /> : <RiEdit2Fill />}
+          </i>
+        </div> */}
       </div>
 
-      <div className="card-content"> 
+      <div className="card-content">
         {items && items.length > 0 ? (
-          items.map((item) => item)
+          items.map((item) => (
+            <div className="item-wrapper">
+              {item}
+              {/* {isEdditing && (
+                <i className="minus-icon" onClick={() => handleRemove()}>
+                  <FaMinus />
+                </i>
+              )} */}
+            </div>
+          ))
         ) : (
           <p className="empty-message">No items available</p>
         )}

@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Timeline - HealthSnapshot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --color-blue: #1a4b8c;
+            --color-light-blue: #e6f0fa;
+            --color-white: #ffffff;
+            --color-dark-gray: #333333;
+            --color-medium-gray: #666666;
+            --color-light-gray: #f5f5f5;
+            --color-green: #2ecc71;
+            --color-orange: #e67e22;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Inter', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--color-light-gray);
+            color: var(--color-dark-gray);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: var(--color-white);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid var(--color-light-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-icon {
+            background-color: var(--color-blue);
+            color: var(--color-white);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-weight: bold;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-blue);
+        }
+
+        .nav-links {
+            flex: 1;
+        }
+
+        .nav-item {
+            padding: 0.9rem 1.5rem;
+            display: flex;
+            align-items: center;
+            color: var(--color-medium-gray);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background-color: var(--color-light-blue);
+            color: var(--color-blue);
+            border-left-color: var(--color-blue);
+        }
+
+        .nav-item i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .user-profile {
+            padding: 1.5rem;
+            border-top: 1px solid var(--color-light-gray);
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--color-light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: var(--color-blue);
+            font-weight: 600;
+        }
+
+        .user-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .user-info p {
+            font-size: 0.8rem;
+            color: var(--color-medium-gray);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: auto;
+        }
+
+        .header {
+            background-color: var(--color-white);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .page-title h1 {
+            color: var(--color-blue);
+            font-size: 1.8rem;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background-color: var(--color-blue);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover {
+            background-color: #153a6d;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--color-blue);
+            color: var(--color-blue);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-light-blue);
+        }
+
+        /* Timeline Content */
+        .timeline-content {
+            padding: 2rem;
+            flex: 1;
+        }
+
+        /* Filters Section */
+        .filters-section {
+            background-color: var(--color-white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .filters-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .filters-title {
+            font-size: 1.2rem;
+            color: var(--color-blue);
+        }
+
+        .clear-filters {
+            color: var(--color-blue);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--color-dark-gray);
+        }
+
+        .filter-select,
+        .filter-input {
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            background-color: var(--color-white);
+        }
+
+        .filter-select:focus,
+        .filter-input:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(26, 75, 140, 0.2);
+        }
+
+        /* Timeline View */
+        .timeline-view {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .timeline-container {
+            flex: 1;
+        }
+
+        .timeline-stats {
+            width: 300px;
+            background-color: var(--color-white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+
+        .stats-title {
+            font-size: 1.1rem;
+            color: var(--color-blue);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-light-gray);
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--color-light-gray);
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            color: var(--color-medium-gray);
+        }
+
+        .stat-value {
+            font-weight: 500;
+            color: var(--color-dark-gray);
+        }
+
+        /* Timeline */
+        .timeline {
+            background-color: var(--color-white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .timeline-month {
+            background-color: var(--color-light-blue);
+            padding: 1rem 1.5rem;
+            color: var(--color-blue);
+            font-weight: 600;
+            border-bottom: 1px solid var(--color-light-gray);
+        }
+
+        .timeline-items {
+            padding: 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--color-light-gray);
+            transition: background-color 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background-color: var(--color-light-gray);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-date {
+            width: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 1.5rem;
+        }
+
+        .timeline-day {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--color-blue);
+            line-height: 1;
+        }
+
+        .timeline-month-year {
+            font-size: 0.8rem;
+            color: var(--color-medium-gray);
+            text-align: center;
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding: 0;
+        }
+
+        .timeline-type {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .type-medication {
+            background-color: var(--color-light-blue);
+            color: var(--color-blue);
+        }
+
+        .type-appointment {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .type-lab {
+            background-color: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .type-document {
+            background-color: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .type-allergy {
+            background-color: #ffebee;
+            color: #d32f2f;
+        }
+
+        .type-condition {
+            background-color: #e0f2f1;
+            color: #00796b;
+        }
+
+        .timeline-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-dark-gray);
+        }
+
+        .timeline-description {
+            color: var(--color-medium-gray);
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-meta {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: var(--color-medium-gray);
+        }
+
+        .timeline-attachment {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            color: var(--color-blue);
+            text-decoration: none;
+        }
+
+        .timeline-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+        }
+
+        .action-btn {
+            padding: 0.3rem 0.7rem;
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--color-medium-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background-color: var(--color-light-blue);
+            color: var(--color-blue);
+            border-color: var(--color-blue);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--color-medium-gray);
+        }
+
+        .empty-icon {
+            font-size: 3rem;
+            color: var(--color-light-gray);
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 70px;
+            }
+
+            .logo-text,
+            .nav-text,
+            .user-info {
+                display: none;
+            }
+
+            .logo {
+                justify-content: center;
+                padding: 0 0.5rem 1.5rem;
+            }
+
+            .nav-item {
+                justify-content: center;
+                padding: 1rem 0.5rem;
+            }
+
+            .nav-item i {
+                margin-right: 0;
+            }
+
+            .user-profile {
+                justify-content: center;
+                padding: 1rem 0.5rem;
+            }
+
+            .timeline-view {
+                flex-direction: column;
+            }
+
+            .timeline-stats {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                flex-direction: row;
+                padding: 1rem;
+            }
+
+            .logo {
+                padding: 0;
+                margin-bottom: 0;
+                border-bottom: none;
+                margin-right: 1rem;
+            }
+
+            .nav-links {
+                display: flex;
+                flex: 1;
+            }
+
+            .nav-item {
+                border-left: none;
+                border-bottom: 3px solid transparent;
+                flex-direction: column;
+                padding: 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .nav-item:hover,
+            .nav-item.active {
+                border-left: none;
+                border-bottom-color: var(--color-blue);
+            }
+
+            .nav-item i {
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+
+            .user-profile {
+                display: none;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .header-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+            }
+
+            .timeline-date {
+                width: 100%;
+                flex-direction: row;
+                justify-content: flex-start;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .timeline-day {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">HS</div>
+                <div class="logo-text">HealthSnapshot</div>
+            </div>
+
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="timeline.html" class="nav-item active">
+                    <i class="fas fa-history"></i>
+                    <span class="nav-text">Timeline</span>
+                </a>
+                <a href="medications.html" class="nav-item">
+                    <i class="fas fa-pills"></i>
+                    <span class="nav-text">Medications</span>
+                </a>
+                <a href="documents.html" class="nav-item">
+                    <i class="fas fa-file-medical"></i>
+                    <span class="nav-text">Documents</span>
+                </a>
+                <a href="appointments.html" class="nav-item">
+                    <i class="fas fa-user-md"></i>
+                    <span class="nav-text">Appointments</span>
+                </a>
+                <a href="profile.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span class="nav-text">Settings</span>
+                </a>
+            </div>
+
+            <div class="user-profile">
+                <div class="user-avatar">JD</div>
+                <div class="user-info">
+                    <h4>John Doe</h4>
+                    <p>Patient</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="page-title">
+                    <h1>Health Timeline</h1>
+                    <span class="timeline-count">47 records</span>
+                </div>
+
+                <div class="header-actions">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-download"></i>
+                        Export
+                    </button>
+                    <button class="btn btn-primary" id="addEventBtn">
+                        <i class="fas fa-plus"></i>
+                        Add Event
+                    </button>
+                </div>
+            </div>
+
+            <!-- Timeline Content -->
+            <div class="timeline-content">
+                <!-- Filters Section -->
+                <div class="filters-section">
+                    <div class="filters-header">
+                        <h3 class="filters-title">Filter Timeline</h3>
+                        <a href="#" class="clear-filters">Clear All</a>
+                    </div>
+
+                    <div class="filters-grid">
+                        <div class="filter-group">
+                            <label class="filter-label">Event Type</label>
+                            <select class="filter-select" id="eventTypeFilter">
+                                <option value="all">All Types</option>
+                                <option value="medication">Medications</option>
+                                <option value="appointment">Appointments</option>
+                                <option value="lab">Lab Results</option>
+                                <option value="document">Documents</option>
+                                <option value="allergy">Allergies</option>
+                                <option value="condition">Conditions</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label class="filter-label">Date Range</label>
+                            <select class="filter-select" id="dateRangeFilter">
+                                <option value="all">All Time</option>
+                                <option value="month">Last Month</option>
+                                <option value="3months">Last 3 Months</option>
+                                <option value="year">Last Year</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label class="filter-label">Search</label>
+                            <input type="text" class="filter-input" id="searchFilter" placeholder="Search events...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline View -->
+                <div class="timeline-view">
+                    <div class="timeline-container">
+                        <!-- Timeline -->
+                        <div class="timeline">
+                            <!-- November 2025 -->
+                            <div class="timeline-month">November 2025</div>
+                            <div class="timeline-items">
+                                <!-- Timeline Item 1 -->
+                                <div class="timeline-item">
+                                    <div class="timeline-date">
+                                        <div class="timeline-day">10</div>
+                                        <div class="timeline-month-year">Nov 2025</div>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-type type-lab">Lab Result</div>
+                                        <h3 class="timeline-title">Cholesterol Panel</h3>
+                                        <p class="timeline-description">
+                                            LDL: 95 mg/dL (Within normal range), HDL: 52 mg/dL, Triglycerides: 120 mg/dL
+                                        </p>
+                                        <div class="timeline-meta">
+                                            <span><i class="fas fa-hospital"></i> City Medical Lab</span>
+                                            <a href="#" class="timeline-attachment">
+                                                <i class="fas fa-paperclip"></i> Lab_Report_Nov10.pdf
+                                            </a>
+                                        </div>
+                                        <div class="timeline-actions">
+                                            <button class="action-btn">View Details</button>
+                                            <button class="action-btn">Download</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Timeline Item 2 -->
+                                <div class="timeline-item">
+                                    <div class="timeline-date">
+                                        <div class="timeline-day">05</div>
+                                        <div class="timeline-month-year">Nov 2025</div>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-type type-appointment">Appointment</div>
+                                        <h3 class="timeline-title">Annual Physical with Dr. Miller</h3>
+                                        <p class="timeline-description">
+                                            Routine check-up. Blood pressure: 128/82 mmHg, Weight: 185 lbs. Discussed
+                                            medication adjustments.
+                                        </p>
+                                        <div class="timeline-meta">
+                                            <span><i class="fas fa-user-md"></i> Dr. Sarah Miller</span>
+                                            <span><i class="fas fa-clock"></i> 30 minutes</span>
+                                        </div>
+                                        <div class="timeline-actions">
+                                            <button class="action-btn">View Details</button>
+                                            <button class="action-btn">Add to Calendar</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Timeline Item 3 -->
+                                <div class="timeline-item">
+                                    <div class="timeline-date">
+                                        <div class="timeline-day">01</div>
+                                        <div class="timeline-month-year">Nov 2025</div>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-type type-medication">Medication</div>
+                                        <h3 class="timeline-title">Metformin Dosage Adjusted</h3>
+                                        <p class="timeline-description">
+                                            Increased dosage from 500mg to 1000mg daily as prescribed by Dr. Miller
+                                            during telehealth consultation.
+                                        </p>
+                                        <div class="timeline-meta">
+                                            <span><i class="fas fa-prescription-bottle"></i> Prescription Update</span>
+                                        </div>
+                                        <div class="timeline-actions">
+                                            <button class="action-btn">View Details</button>
+                                            <button class="action-btn">Edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- October 2025 -->
+                            <div class="timeline-month">October 2025</div>
+                            <div class="timeline-items">
+                                <!-- Timeline Item 4 -->
+                                <div class="timeline-item">
+                                    <div class="timeline-date">
+                                        <div class="timeline-day">22</div>
+                                        <div class="timeline-month-year">Oct 2025</div>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-type type-document">Document</div>
+                                        <h3 class="timeline-title">Uploaded Insurance Card</h3>
+                                        <p class="timeline-description">
+                                            Updated insurance information with new card effective November 1st.
+                                        </p>
+                                        <div class="timeline-meta">
+                                            <a href="#" class="timeline-attachment">
+                                                <i class="fas fa-paperclip"></i> Insurance_Card_Front.jpg
+                                            </a>
+                                            <a href="#" class="timeline-attachment">
+                                                <i class="fas fa-paperclip"></i> Insurance_Card_Back.jpg
+                                            </a>
+                                        </div>
+                                        <div class="timeline-actions">
+                                            <button class="action-btn">View</button>
+                                            <button class="action-btn">Replace</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Timeline Item 5 -->
+                                <div class="timeline-item">
+                                    <div class="timeline-date">
+                                        <div class="timeline-day">15</div>
+                                        <div class="timeline-month-year">Oct 2025</div>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-type type-allergy">Allergy</div>
+                                        <h3 class="timeline-title">Added New Allergy: Ibuprofen</h3>
+                                        <p class="timeline-description">
+                                            Mild rash reaction noted after taking ibuprofen for headache. Added to
+                                            allergy list.
+                                        </p>
+                                        <div class="timeline-meta">
+                                            <span><i class="fas fa-exclamation-triangle"></i> Moderate Severity</span>
+                                        </div>
+                                        <div class="timeline-actions">
+                                            <button class="action-btn">View Details</button>
+                                            <button class="action-btn">Edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Timeline Item 6 -->
+                                <div class="timeline-item">
+                                    <div class="timeline-date">
+                                        <div class="timeline-day">08</div>
+                                        <div class="timeline-month-year">Oct 2025</div>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <div class="timeline-type type-condition">Condition</div>
+                                        <h3 class="timeline-title">Diagnosed with Hypertension</h3>
+                                        <p class="timeline-description">
+                                            Stage 1 hypertension diagnosis confirmed. Lifestyle modifications and
+                                            monitoring recommended.
+                                        </p>
+                                        <div class="timeline-meta">
+                                            <span><i class="fas fa-stethoscope"></i> Dr. Sarah Miller</span>
+                                        </div>
+                                        <div class="timeline-actions">
+                                            <button class="action-btn">View Details</button>
+                                            <button class="action-btn">Manage</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Stats -->
+                    <div class="timeline-stats">
+                        <h3 class="stats-title">Timeline Summary</h3>
+
+                        <div class="stat-item">
+                            <span class="stat-label">Total Records</span>
+                            <span class="stat-value">47</span>
+                        </div>
+
+                        <div class="stat-item">
+                            <span class="stat-label">This Month</span>
+                            <span class="stat-value">3</span>
+                        </div>
+
+                        <div class="stat-item">
+                            <span class="stat-label">Medications</span>
+                            <span class="stat-value">12</span>
+                        </div>
+
+                        <div class="stat-item">
+                            <span class="stat-label">Appointments</span>
+                            <span class="stat-value">8</span>
+                        </div>
+
+                        <div class="stat-item">
+                            <span class="stat-label">Lab Results</span>
+                            <span class="stat-value">15</span>
+                        </div>
+
+                        <div class="stat-item">
+                            <span class="stat-label">Documents</span>
+                            <span class="stat-value">7</span>
+                        </div>
+
+                        <div class="stat-item">
+                            <span class="stat-label">Earliest Record</span>
+                            <span class="stat-value">Mar 2023</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add Event Button
+            document.getElementById('addEventBtn').addEventListener('click', function () {
+                alert('In a real app, this would open a form to add a new health event');
+            });
+
+            // Filter functionality
+            const eventTypeFilter = document.getElementById('eventTypeFilter');
+            const dateRangeFilter = document.getElementById('dateRangeFilter');
+            const searchFilter = document.getElementById('searchFilter');
+
+            function applyFilters() {
+                const eventType = eventTypeFilter.value;
+                const dateRange = dateRangeFilter.value;
+                const searchTerm = searchFilter.value.toLowerCase();
+
+                // In a real app, this would filter the timeline items
+                console.log('Applying filters:', { eventType, dateRange, searchTerm });
+
+                // Show a message for demo purposes
+                if (eventType !== 'all' || dateRange !== 'all' || searchTerm) {
+                    alert(`Filters applied:\n- Event Type: ${eventType}\n- Date Range: ${dateRange}\n- Search: ${searchTerm || 'None'}`);
+                }
+            }
+
+            eventTypeFilter.addEventListener('change', applyFilters);
+            dateRangeFilter.addEventListener('change', applyFilters);
+            searchFilter.addEventListener('input', applyFilters);
+
+            // Action buttons
+            document.querySelectorAll('.action-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const action = this.textContent;
+                    alert(`Action: ${action}. In a real app, this would perform the specific action.`);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

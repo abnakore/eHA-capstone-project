@@ -17,15 +17,26 @@ function Input({
   return (
     <div className={`form-group ${error ? "has-error" : ""}`}>
       <label htmlFor={name}>{title}</label>
-      <input
-        type={type === "password" && showPassword ? "text" : type}
-        name={name}
-        placeholder={placeholder}
-        required={required}
-        value={value}
-        onChange={handleChange}
-      />
-      
+      {type === "textarea" ? (
+        <textarea
+          name={name}
+          placeholder={placeholder}
+          required={required}
+          value={value}
+          onChange={handleChange}
+          rows={5}
+        />
+      ) : (
+        <input
+          type={type === "password" && showPassword ? "text" : type}
+          name={name}
+          placeholder={placeholder}
+          required={required}
+          value={value}
+          onChange={handleChange}
+        />
+      )}
+
       {type === "password" ? (
         <i
           className="right-icon"

@@ -1,7 +1,7 @@
 import React from "react";
 import "./dashboard.css";
 
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useUser } from "../contexts/userContext";
 
 import Aside from "../containers/Aside";
@@ -17,7 +17,6 @@ import TimelineItem from "../components/TimelineItem";
 function Dashboard() {
   // get user from context
   const { user, loading } = useUser();
-  const navigate = useNavigate();
 
   // Medications data
   const medications = [
@@ -94,20 +93,18 @@ function Dashboard() {
     },
   ];
 
-  // Prevent rendering if user is not loaded yet
+  // !!! Prevent rendering if user is not loaded yet
   if (loading) {
     return <div>Loading...</div>;
   }
 
   // Redirect to login if no user
   if (!loading && !user) {
-    // In a real app, you might use something like:
-    navigate("/login");
-    return null;
+    return <Navigate to={"/login"} replace />;
   }
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container page">
       <Aside />
 
       <div className="content">
@@ -115,6 +112,8 @@ function Dashboard() {
           <h1>Welcome back, {user?.firstName}!</h1>
           <p>Here's a summary of your health data.</p>
         </div>
+
+        {/* !!! Add Blood type, bllod group and other info */}
 
         <div className="critical-info">
           <h2 className="section-title">Critical Information</h2>

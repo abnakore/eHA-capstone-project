@@ -1,5 +1,6 @@
 .contact-item {
     padding: 1rem;
+    flex: 1;
 }
 
 .contact-name {
