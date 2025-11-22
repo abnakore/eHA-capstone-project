@@ -32,8 +32,8 @@ function CriticalCard({ icon, title, items }) {
 
       <div className="card-content">
         {items && items.length > 0 ? (
-          items.map((item) => (
-            <div className="item-wrapper">
+          items.map((item, i) => (
+            <div key={i} className="item-wrapper">
               {item}
               {/* {isEdditing && (
                 <i className="minus-icon" onClick={() => handleRemove()}>

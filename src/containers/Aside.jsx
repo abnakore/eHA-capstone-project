@@ -13,7 +13,6 @@ import { useUser } from "../contexts/userContext";
 function Aside() {
   // Get use data from context
   const { user } = useUser();
-  console.log(user);
 
   // Navigation links data
   const navLinks = [

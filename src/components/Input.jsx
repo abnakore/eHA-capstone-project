@@ -11,6 +11,7 @@ function Input({
   value,
   handleChange,
   error,
+  options,
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -26,6 +27,17 @@ function Input({
           onChange={handleChange}
           rows={5}
         />
+      ) : type === "dropdown" ? (
+        <select
+          name={name}
+          value={value}
+          onChange={handleChange}
+          required={required}
+        >
+          {options.map((option) => (
+            <option key={option.value} value={option.value}>{option.label}</option>
+          ))}
+        </select>
       ) : (
         <input
           type={type === "password" && showPassword ? "text" : type}

@@ -24,6 +24,7 @@ function SignupCard() {
     gender: "",
     email: "",
     password: "",
+    confirmPassword:"",
     phoneNumber: "",
     emergencyContact: "",
   });
@@ -92,9 +93,11 @@ function SignupCard() {
     } else if (formData.password.length < 6) {
       newErrors.password = "Password must be at least 6 characters.";
     }
+    if (formData.password !== formData.confirmPassword)
+      newErrors.confirmPassword = "Password confirmation must be same as password.";
 
-    // Phone number validation
     if (!formData.phoneNumber.trim()) {
+      // Phone number validation
       newErrors.phoneNumber = "Phone number is required.";
     }
     // Simple phone number format check (+countrycode-number)
@@ -147,9 +150,15 @@ function SignupCard() {
 
     // Clear form
     setFormData({
-      fullName: "",
+      firstName: "",
+      lastName: "",
+      dob: "",
+      gender: "",
       email: "",
       password: "",
+      confirmPassword: "",
+      phoneNumber: "",
+      emergencyContact: "",
     });
 
     // Redirect
@@ -214,7 +223,16 @@ function SignupCard() {
           handleChange={handleChange}
           error={errors.password}
         />
-        {/* !!! Add confirm password input */}
+        <Input
+          title="Confirm Password"
+          type="password"
+          name="confirmPassword"
+          placeholder="*********"
+          required
+          value={formData.confirmPassword}
+          handleChange={handleChange}
+          error={errors.confirmPassword}
+        />
         <div className="form-row">
           <div className={`form-group ${errors.gender ? "has-error" : ""}`}>
             <label htmlFor="gender">Gender</label>

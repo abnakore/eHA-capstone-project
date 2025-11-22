@@ -1,0 +1,77 @@
+.file-upload {
+    border: 2px dashed #ddd;
+    border-radius: 6px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.file-upload:hover {
+    border-color: var(--color-blue);
+    background-color: var(--color-light-blue);
+}
+
+.file-upload i {
+    font-size: 2rem;
+    color: var(--color-medium-gray);
+    margin-bottom: 1rem;
+}
+
+.file-upload p {
+    color: var(--color-medium-gray);
+    margin-bottom: 0.5rem;
+}
+
+.file-upload small {
+    color: var(--color-medium-gray);
+}
+
+.file-input {
+    display: none;
+}
+
+.file-preview {
+    margin-top: 1rem;
+    display: none;
+}
+
+.file-preview.active {
+    display: block;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem;
+    background-color: var(--color-light-gray);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.file-icon {
+    color: var(--color-blue);
+}
+
+.file-name {
+    font-weight: 500;
+}
+
+.file-remove {
+    background: none;
+    border: none;
+    color: var(--color-medium-gray);
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.file-remove:hover {
+    color: #e74c3c;
+}
