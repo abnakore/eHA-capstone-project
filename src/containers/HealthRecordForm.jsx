@@ -34,6 +34,7 @@ const HealthRecordForm = ({}) => {
   ];
 
   // Form Data
+  // !!! get medication kind (tablet, syrup or injection)
   const [formData, setFormData] = useState({
     record_type: "Visit", // !!!
     event_date: new Date().toISOString().split("T")[0],

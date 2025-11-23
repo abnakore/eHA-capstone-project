@@ -40,24 +40,29 @@
     border-radius: 4px;
     font-size: 0.8rem;
     margin-right: 0.5rem;
+
+    /* Default */
+    background-color: var(--color-light-gray);
+    color: var(--color-dark-gray);
 }
 
-.type-medication {
+.type-Medication {
     background-color: var(--color-light-blue);
     color: var(--color-blue);
 }
 
-.type-appointment {
+.type-Visit {
     background-color: var(--color-light-green);
     color: var(--color-green);
 }
 
-.type-lab {
+.type-Lab,
+.type-Imaging {
     background-color: var(--color-light-yellow);
     color: var(--color-orange);
 }
 
-.type-other {
+.type-Other {
     background-color: var(--color-light-gray);
     color: var(--color-dark-gray);
 }

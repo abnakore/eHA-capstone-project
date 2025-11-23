@@ -4,6 +4,10 @@
     flex: 1;
 }
 
+.allergy-item:hover {
+    background-color: var(--color-light-yellow);
+}
+
 .allergy-item.severity-severe:hover {
     background: var(--color-light-red);
 }
@@ -12,9 +16,10 @@
     background: var(--color-light-yellow);
 }
 
-.allergy-item.severity-low:hover {
+.allergy-item.severity-mild:hover {
     background: var(--color-light-green);
 }
+
 
 .allergy-name {
     font-size: 15px;
@@ -27,6 +32,9 @@
     padding: 5px 10px;
     border-radius: 10px;
 
+    /* Default */
+    background-color: var(--color-light-yellow);
+
     &.severity-severe {
         background-color: var(--color-light-red);
     }
@@ -35,7 +43,7 @@
         background-color: var(--color-light-yellow);
     }
 
-    &.severity-low {
+    &.severity-mild {
         background-color: var(--color-light-green);
     }
 }

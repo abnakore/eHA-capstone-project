@@ -31,7 +31,7 @@
     margin-bottom: 2rem;
 }
 
-.section-title {
+.form-section .section-title {
     font-size: 1.2rem;
     color: var(--color-blue);
     margin-bottom: 1rem;
@@ -41,7 +41,7 @@
     gap: 0.5rem;
 }
 
-.section-title i {
+.form-section .section-title i {
     font-size: 1rem;
 }
 

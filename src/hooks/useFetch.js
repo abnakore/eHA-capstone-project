@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Custom hook for fetching data
 export const useFetch = (fn, dependencies = []) => {

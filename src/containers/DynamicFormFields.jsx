@@ -228,7 +228,7 @@ const DynamicFormFields = ({
                 { value: "mild", label: "Mild" },
                 { value: "moderate", label: "Moderate" },
                 { value: "severe", label: "Severe" },
-                { value: "life_threatening", label: "Life-threatening" },
+                // { value: "life_threatening", label: "Life-threatening" },
                 { value: "unknown", label: "Unknown" },
               ]}
               error={""}
@@ -330,9 +330,9 @@ const DynamicFormFields = ({
               options={[
                 { value: "active", label: "Active" },
                 { value: "inactive", label: "Inactive" },
-                { value: "resolved", label: "Resolved" },
-                { value: "chronic", label: "Chronic" },
-                { value: "recurring", label: "Recurring" },
+                // { value: "resolved", label: "Resolved" },
+                // { value: "chronic", label: "Chronic" },
+                // { value: "recurring", label: "Recurring" },
               ]}
               error={""}
             />

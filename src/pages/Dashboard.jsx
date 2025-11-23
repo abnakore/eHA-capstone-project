@@ -13,85 +13,98 @@ import { FaPills } from "react-icons/fa6";
 import { FaAllergies } from "react-icons/fa";
 import { MdSick } from "react-icons/md";
 import TimelineItem from "../components/TimelineItem";
+import { formatDate, getHealthRecords, loadData } from "../data/data";
+import { useFetch } from "../hooks/useFetch";
 
 function Dashboard() {
   // get user from context
   const { user, loading } = useUser();
 
   // Medications data
-  const medications = [
-    {
-      name: "Lisinopril",
-      dosage: "10mg daily",
-      status: "Active",
-      kind: "tablet",
-    },
-    {
-      name: "Metformin",
-      dosage: "500mg twice daily",
-      status: "Active",
-      kind: "injection",
-    },
-    {
-      name: "Atorvastatin",
-      dosage: "20mg at bedtime",
-      status: "Active",
-      kind: "syrup",
-    },
-  ];
+  const { data: medications } = useFetch(() => getHealthRecords("Medication"));
+  // const medications = [
+  //   {
+  //     name: "Lisinopril",
+  //     dosage: "10mg daily",
+  //     status: "Active",
+  //     kind: "tablet",
+  //   },
+  //   {
+  //     name: "Metformin",
+  //     dosage: "500mg twice daily",
+  //     status: "Active",
+  //     kind: "injection",
+  //   },
+  //   {
+  //     name: "Atorvastatin",
+  //     dosage: "20mg at bedtime",
+  //     status: "Active",
+  //     kind: "syrup",
+  //   },
+  // ];
 
   // Allergy data
-  const allergies = [
-    { name: "Penicillin", level: "Severe" },
-    { name: "Shellfish", level: "Moderate" },
-    { name: "Ibuprofen", level: "Moderate" },
-  ];
+
+  const { data: allergies } = useFetch(() =>
+    getHealthRecords("Allergy_Report")
+  );
+
+  // const allergies = [
+  //   { name: "Penicillin", level: "Severe" },
+  //   { name: "Shellfish", level: "Moderate" },
+  //   { name: "Ibuprofen", level: "Moderate" },
+  // ];
 
   // Current conditions data
-  const currentConditions = [
-    { name: "Type 2 Diabetes", status: "Active" },
-    { name: "Hypertension", status: "Inactive" },
-  ];
+  const { data: currentConditions } = useFetch(() =>
+    getHealthRecords("Condition")
+  );
+
+  // const currentConditions = [
+  //   { name: "Type 2 Diabetes", status: "Active" },
+  //   { name: "Hypertension", status: "Inactive" },
+  // ];
 
   // Health events data
-  const healthEvents = [
-    {
-      date: "Nov 10",
-      type: "lab",
-      title: "Lab Result",
-      description: "LDL: 95 mg/dL (Within normal range)",
-    },
-    {
-      date: "Nov 05",
-      type: "appointment",
-      title: "Doctor Appointment",
-      description: "Annual physical check-up with Dr. Smith.",
-    },
-    {
-      date: "Nov 01",
-      type: "medication",
-      title: "Medication Update",
-      description: "Started Metformin 500mg twice daily.",
-    },
-    {
-      date: "Nov 10",
-      type: "other",
-      title: "Lab Result",
-      description: "LDL: 95 mg/dL (Within normal range)",
-    },
-    {
-      date: "Nov 06",
-      type: "appointment",
-      title: "Doctor Appointment",
-      description: "Annual physical check-up with Dr. Smith.",
-    },
-    {
-      date: "Nov 09",
-      type: "medication",
-      title: "Medication Update",
-      description: "Started Metformin 500mg twice daily.",
-    },
-  ];
+  const { data: healthEvents } = useFetch(() => loadData("healthRecords"));
+  // const healthEvents = [
+  //   {
+  //     date: "Nov 10",
+  //     type: "lab",
+  //     title: "Lab Result",
+  //     description: "LDL: 95 mg/dL (Within normal range)",
+  //   },
+  //   {
+  //     date: "Nov 05",
+  //     type: "appointment",
+  //     title: "Doctor Appointment",
+  //     description: "Annual physical check-up with Dr. Smith.",
+  //   },
+  //   {
+  //     date: "Nov 01",
+  //     type: "medication",
+  //     title: "Medication Update",
+  //     description: "Started Metformin 500mg twice daily.",
+  //   },
+  //   {
+  //     date: "Nov 10",
+  //     type: "other",
+  //     title: "Lab Result",
+  //     description: "LDL: 95 mg/dL (Within normal range)",
+  //   },
+  //   {
+  //     date: "Nov 06",
+  //     type: "appointment",
+  //     title: "Doctor Appointment",
+  //     description: "Annual physical check-up with Dr. Smith.",
+  //   },
+  //   {
+  //     date: "Nov 09",
+  //     type: "medication",
+  //     title: "Medication Update",
+  //     description: "Started Metformin 500mg twice daily.",
+  //   },
+  // ];
 
   // !!! Prevent rendering if user is not loaded yet
   if (loading) {
@@ -122,12 +135,12 @@ function Dashboard() {
             <CriticalCard
               icon={<FaPills />}
               title="Current Medications"
-              items={medications.map((med, index) => (
+              items={medications?.map((med, index) => (
                 <MedicationItem
                   key={index}
                   name={med.name}
                   dosage={med.dosage}
-                  status={med.status}
+                  status={med.status || "Active"}
                   kind={med.kind}
                 />
               ))}
@@ -135,18 +148,18 @@ function Dashboard() {
             <CriticalCard
               icon={<FaAllergies />}
               title="Allergies"
-              items={allergies.map((allergy, index) => (
+              items={allergies?.map((allergy, index) => (
                 <AllergyItem
                   key={index}
-                  name={allergy.name}
-                  level={allergy.level}
+                  name={allergy.allergenName}
+                  level={allergy.severity}
                 />
               ))}
             />
             <CriticalCard
               icon={<MdSick />}
               title="Current Conditions"
-              items={currentConditions.map((condition, index) => (
+              items={currentConditions?.map((condition, index) => (
                 <AllergyItem
                   key={index}
                   name={condition.name}
@@ -166,15 +179,20 @@ function Dashboard() {
           <div className="card">
             {/* Reverse the array and take at most 5 events */}
             {healthEvents
-              .reverse()
+              ?.reverse()
               .slice(0, 5)
               .map((event, index) => (
                 <TimelineItem
                   key={index}
-                  date={event.date}
-                  type={event.type}
-                  title={event.title}
-                  description={event.description}
+                  date={formatDate(event.event_date)}
+                  type={event.record_type}
+                  title={
+                    event.title ||
+                    event.name ||
+                    event.allergenName ||
+                    event.imagingCenter
+                  }
+                  description={event.note}
                 />
               ))}
           </div>
