@@ -1,7 +1,7 @@
 import React from "react";
 import "./dashboard.css";
 
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useUser } from "../contexts/userContext";
 
 import Aside from "../containers/Aside";
@@ -13,12 +13,13 @@ import { FaPills } from "react-icons/fa6";
 import { FaAllergies } from "react-icons/fa";
 import { MdSick } from "react-icons/md";
 import TimelineItem from "../components/TimelineItem";
-import { formatDate, getHealthRecords, loadData } from "../data/data";
+import { getHealthRecords, loadData } from "../data/data";
 import { useFetch } from "../hooks/useFetch";
+import { formatDate } from "../scripts/functions";
 
 function Dashboard() {
   // get user from context
-  const { user, loading } = useUser();
+  const { user, loading, loggedInUser } = useUser();
 
   // Medications data
   const { data: medications } = useFetch(() => getHealthRecords("Medication"));
@@ -112,7 +113,7 @@ function Dashboard() {
   }
 
   // Redirect to login if no user
-  if (!loading && !user) {
+  if (!loading && !loggedInUser) {
     return <Navigate to={"/login"} replace />;
   }
 
@@ -173,7 +174,7 @@ function Dashboard() {
         <div className="timeline-preview">
           <h2 className="section-title">
             Recent Health Events
-            <a href="#">View Full Timeline</a>
+            <Link to="/timeline">View Full Timeline</Link>
           </h2>
 
           <div className="card">

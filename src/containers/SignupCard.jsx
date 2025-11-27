@@ -5,7 +5,7 @@ import "./signupCard.css";
 import { useUser } from "../contexts/userContext";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { loadData, saveData } from "../data/data";
+import { loadData, logIn, saveData } from "../data/data";
 import { Link, useNavigate } from "react-router-dom";
 import sha256 from "js-sha256";
 
@@ -24,7 +24,7 @@ function SignupCard() {
     gender: "",
     email: "",
     password: "",
-    confirmPassword:"",
+    confirmPassword: "",
     phoneNumber: "",
     emergencyContact: "",
   });
@@ -94,7 +94,8 @@ function SignupCard() {
       newErrors.password = "Password must be at least 6 characters.";
     }
     if (formData.password !== formData.confirmPassword)
-      newErrors.confirmPassword = "Password confirmation must be same as password.";
+      newErrors.confirmPassword =
+        "Password confirmation must be same as password.";
 
     if (!formData.phoneNumber.trim()) {
       // Phone number validation
@@ -146,23 +147,30 @@ function SignupCard() {
     await saveData("users", existingUsers);
 
     // Set logged in user
-    setLoggedInUser(newUser.email);
+    try {
+      const existingUser = await logIn(formData.email, formData.password);
 
-    // Clear form
-    setFormData({
-      firstName: "",
-      lastName: "",
-      dob: "",
-      gender: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      phoneNumber: "",
-      emergencyContact: "",
-    });
+      // On successful login
+      setLoggedInUser(existingUser.email);
 
-    // Redirect
-    navigate("/dashboard");
+      // Clear form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        dob: "",
+        gender: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        phoneNumber: "",
+        emergencyContact: "",
+      });
+
+      // Redirect
+      navigate("/dashboard");
+    } catch (error) {
+      setErrors({ form: error.message });
+    }
   };
 
   return (

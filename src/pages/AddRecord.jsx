@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 
 function AddRecord() {
   // Get data from context
-  const { loading, user } = useUser();
+  const { loading, user, loggedInUser } = useUser();
 
   // !!! Prevent rendering if user is not loaded yet
   if (loading) {
@@ -15,7 +15,7 @@ function AddRecord() {
   }
 
   // Redirect to login if no user
-  if (!loading && !user) {
+  if (!loading && !loggedInUser) {
     return <Navigate to={"/login"} replace />;
   }
 

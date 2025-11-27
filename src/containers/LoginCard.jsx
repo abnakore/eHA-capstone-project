@@ -5,7 +5,7 @@ import "./loginCard.css";
 import { useUser } from "../contexts/userContext";
 import Input from "../components/Input";
 import Button from "../components/Button";
-import { loadData } from "../data/data";
+import { loadData, logIn } from "../data/data";
 import { Link, useNavigate } from "react-router-dom";
 import { sha256 } from "js-sha256";
 
@@ -69,27 +69,33 @@ function LoginCard() {
 
     setErrors({});
     // Proceed with login logic (e.g., API call)
-    const usersData = (await loadData("users")) || [];
+    // const usersData = (await loadData("users")) || [];
 
-    const existingUser = usersData.find(
-      (user) =>
-        user.email === formData.email &&
-        user.password === sha256(formData.password)
-    );
+    // const existingUser = usersData.find(
+    //   (user) =>
+    //     user.email === formData.email &&
+    //     user.password === sha256(formData.password)
+    // );
 
-    if (!existingUser) {
-      setErrors({ form: "Invalid email or password." });
-      return;
+    // if (!existingUser) {
+    //   setErrors({ form: "Invalid email or password." });
+    //   return;
+    // }
+
+    try {
+      const existingUser = await logIn(formData.email, formData.password);
+
+      // On successful login
+      setLoggedInUser(existingUser.email);
+
+      // Clear form fields and errors on successful validation
+      setFormData({ email: "", password: "" });
+
+      // Redirect
+      navigate("/dashboard");
+    } catch (error) {
+      setErrors({ form: error.message });
     }
-
-    // On successful login
-    setLoggedInUser(existingUser.email);
-
-    // Clear form fields and errors on successful validation
-    setFormData({ email: "", password: "" });
-
-    // Redirect
-    navigate("/dashboard");
   };
 
   return (

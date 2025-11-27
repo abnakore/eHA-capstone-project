@@ -1,3 +1,5 @@
+import { sha256 } from "js-sha256";
+
 export const saveData = async (key, value) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
@@ -17,27 +19,28 @@ export const clearAllData = async () => {
 
 export const getHealthRecords = async (record_type) => {
   const healthRecords = (await loadData("healthRecords")) || [];
-  console.log(
-    healthRecords,
-    record_type,
-    healthRecords.filter(
-      (healthRecord) => healthRecord.record_type === record_type
-    )
-  );
 
   return healthRecords.filter(
     (healthRecord) => healthRecord.record_type === record_type
   );
 };
 
-// 2025-11-22  ->  Nov 22
-export const formatDate = (date_str) => {
-  const date = new Date(date_str);
+export const logIn = async (email, password) => {
+  // Login user
+  const usersData = (await loadData("users")) || [];
+  console.log("====================================");
+  console.log(usersData);
+  console.log("====================================");
 
-  const formatted = date.toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-  });
+  const existingUser = usersData.find(
+    (user) => user.email === email && user.password === sha256(password)
+  );
 
-  return formatted;
+  if (!existingUser) {
+    throw new Error("Invalid email or password.");
+  }
+
+  // Save the logged in user to local storage
+  await saveData("loggedInUser", existingUser.email);
+  return existingUser;
 };

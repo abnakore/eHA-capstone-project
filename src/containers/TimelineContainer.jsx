@@ -1,7 +1,7 @@
 import React from "react";
 import "./timelineContainer.css";
 import TimelineItem from "../components/TimelineItem";
-import { formatDate } from "../data/data";
+import { formatDate, groupByMonth } from "../scripts/functions";
 
 function TimelineContainer() {
   const records = [

@@ -1,4 +1,4 @@
-function groupByMonth(records) {
+export const groupByMonth = (records) => {
   const groups = {};
 
   for (const item of records) {
@@ -24,4 +24,16 @@ function groupByMonth(records) {
     month,
     records,
   }));
-}
+};
+
+// 2025-11-22  ->  Nov 22
+export const formatDate = (date_str) => {
+  const date = new Date(date_str);
+
+  const formatted = date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+
+  return formatted;
+};

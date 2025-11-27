@@ -1,22 +1,39 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { loadData } from "../data/data";
+import { loadData, saveData } from "../data/data";
 
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  // Use state to save user info (for simplicity, using a static user here)
-  const [loggedInUser, setLoggedInUser] = useState("");
+  // Use state to save user info
+  const [loggedInUser, setLoggedInUser] = useState(null);
   const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  // Load the logged in user
+  useEffect(() => {
+    const loadUser = async () => {
+      const user = await loadData("loggedInUser");
+      setLoggedInUser(user);
+    };
+
+    loadUser();
+  }, []);
 
   // Function to fetch or update user info
   const fetchUser = async () => {
+    setLoading(true);
     // Simulate fetching user data
-    const usersData = await loadData("users");
+    try {
+      const usersData = await loadData("users");
+      const loggedInUserData =
+        usersData?.find((u) => u.email === loggedInUser) || null;
 
-    const loggedInUserData =
-      usersData?.find((u) => u.email === loggedInUser) || null;
-
-    setUser(loggedInUserData);
+      setUser(loggedInUserData);
+    } catch (e) {
+      console.log("Error while fetching user", e);
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Fetch user info on mount
@@ -25,7 +42,9 @@ export const UserProvider = ({ children }) => {
   }, [loggedInUser]);
 
   return (
-    <UserContext.Provider value={{ loggedInUser, setLoggedInUser, user, fetchUser }}>
+    <UserContext.Provider
+      value={{ loading, loggedInUser, setLoggedInUser, user, fetchUser }}
+    >
       {children}
     </UserContext.Provider>
   );
