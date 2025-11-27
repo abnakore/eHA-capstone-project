@@ -20,7 +20,7 @@ function Aside() {
     { icon: <LuHistory />, text: "Timeline", to: "/timeline" },
     { icon: <FaPlus />, text: "Add Record", to: "/add-record" },
     // { icon: <FaPills />, text: "Medications", to: "/medications" },
-    { icon: <FaFileMedical />, text: "Documents", to: "/documents" },
+    // { icon: <FaFileMedical />, text: "Documents", to: "/documents" },
     // { icon: <FaUserMd />, text: "Appointments", to: "/appointments" },
     // { icon: <FaChartLine />, text: "Health Metrics", to: "/health-metrics" },
     // { icon: <RiSettingsFill />, text: "Settings", to: "/settings" },
