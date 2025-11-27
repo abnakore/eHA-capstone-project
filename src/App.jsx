@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import AddRecord from "./pages/AddRecord";
+import Timeline from "./pages/Timeline";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add-record" element={<AddRecord />} />
+        <Route path="/timeline" element={<Timeline />} />
         <Route path="*" element={<Login />} />
       </Routes>
     </>
