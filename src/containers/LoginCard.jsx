@@ -92,7 +92,7 @@ function LoginCard() {
       setFormData({ email: "", password: "" });
 
       // Redirect
-      navigate("/dashboard");
+      navigate("/dashboard", {replace: true});
     } catch (error) {
       setErrors({ form: error.message });
     }

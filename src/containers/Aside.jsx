@@ -7,10 +7,15 @@ import { FaPills, FaPlus } from "react-icons/fa6";
 import { FaFileMedical } from "react-icons/fa6";
 import { FaUserMd } from "react-icons/fa";
 import { FaChartLine } from "react-icons/fa6";
+import { IoLogOutOutline } from "react-icons/io5";
 import { RiSettingsFill } from "react-icons/ri";
 import { useUser } from "../contexts/userContext";
+import { logOut } from "../data/data";
+import { useNavigate } from "react-router-dom";
 
 function Aside() {
+  // use navigate for redirection
+  const navigate = useNavigate();
   // Get use data from context
   const { user } = useUser();
 
@@ -55,6 +60,16 @@ function Aside() {
           </h4>
           {/* <p>{user?.role}</p> */}
         </div>
+        <i
+          className="user-avatar"
+          title="Log out"
+          onClick={() => {
+            logOut();
+            navigate("/login", {replace: true})
+          }}
+        >
+          <IoLogOutOutline />
+        </i>
       </div>
     </div>
   );

@@ -44,3 +44,7 @@ export const logIn = async (email, password) => {
   await saveData("loggedInUser", existingUser.email);
   return existingUser;
 };
+
+export const logOut = async () => {
+  await saveData("loggedInUser", null);
+};
