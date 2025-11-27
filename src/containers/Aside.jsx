@@ -33,8 +33,8 @@ function Aside() {
   return (
     <div className="sidebar">
       <div className="logo">
-        <div className="logo-icon">MH™</div>
-        <div className="logo-text">My Health Hub</div>
+        <div className="logo-icon">HL</div>
+        <div className="logo-text">HealthLog</div>
       </div>
 
       <div className="nav-links">
@@ -65,7 +65,7 @@ function Aside() {
           title="Log out"
           onClick={() => {
             logOut();
-            navigate("/login", {replace: true})
+            navigate("/login", { replace: true });
           }}
         >
           <IoLogOutOutline />

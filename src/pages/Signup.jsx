@@ -1,6 +1,6 @@
 import React from "react";
 import SignupCard from "../containers/SignupCard";
-import "./Signup.css";
+import "./signup.css";
 
 function Signup() {
   return (

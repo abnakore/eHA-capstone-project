@@ -177,7 +177,7 @@ function SignupCard() {
     <div className="signup-card">
       <div className="signup-header">
         <p className="subtitle">Welcome</p>
-        <h1 className="logo-title">My Health Hub</h1>
+        <h1 className="logo-title">HealthLog</h1>
         <p className="subtitle">
           Securely sign up to access your personal health records.
         </p>

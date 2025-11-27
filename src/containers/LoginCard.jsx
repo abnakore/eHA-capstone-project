@@ -102,7 +102,7 @@ function LoginCard() {
     <div className="login-card">
       <div className="login-header">
         <p className="subtitle">Welcome Back</p>
-        <h1 className="logo-title">My Health Hub</h1>
+        <h1 className="logo-title">HealthLog</h1>
         <p className="subtitle">
           Securely log in to your personal health records.
         </p>
