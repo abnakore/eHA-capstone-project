@@ -18,7 +18,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/add-record" element={<AddRecord />} />
         <Route path="/timeline" element={<Timeline />} />
-        <Route path="*" element={<Login />} />
+        <Route path="*" element={<Dashboard />} />
       </Routes>
     </>
   );
