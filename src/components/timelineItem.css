@@ -51,6 +51,11 @@
     color: var(--color-blue);
 }
 
+.type-Allergy_Report {
+    background-color: var(--color-light-red);
+    color: var(--color-red);
+}
+
 .type-Visit {
     background-color: var(--color-light-green);
     color: var(--color-green);
