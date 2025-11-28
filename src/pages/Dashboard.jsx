@@ -108,7 +108,7 @@ function Dashboard() {
 
           <div className="card">
             {/* Reverse the array and take at most 5 events */}
-            {healthEvents.length > 0 ? (
+            {healthEvents?.length > 0 ? (
               healthEvents
                 ?.reverse()
                 .slice(0, 5)

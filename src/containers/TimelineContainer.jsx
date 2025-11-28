@@ -14,7 +14,7 @@ function TimelineContainer() {
     <div class="timeline-container">
       {/* <!-- Timeline --> */}
       <div class="timeline">
-        {recordsByMonth.length > 0 ? (
+        {recordsByMonth?.length > 0 ? (
           recordsByMonth.map((month, i) => (
             <>
               <div class="timeline-month">{month.month}</div>
