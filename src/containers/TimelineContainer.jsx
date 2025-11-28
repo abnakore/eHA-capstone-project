@@ -6,8 +6,7 @@ import { useFetch } from "../hooks/useFetch";
 import { loadData } from "../data/data";
 
 function TimelineContainer() {
-  // const { data: records } = useFetch(() => loadData("healthRecords"));
-  const records = [];
+  const { data: records } = useFetch(() => loadData("healthRecords"));
 
   const recordsByMonth = groupByMonth(records || []);
 
