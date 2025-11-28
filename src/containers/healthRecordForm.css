@@ -70,3 +70,13 @@
     padding-top: 1.5rem;
     border-top: 1px solid var(--color-light-gray);
 }
+
+@media (max-width: 800px) {
+    .form-content {
+        padding: 0px;
+    }
+
+    .form-container {
+        padding: 12px;
+    }
+}

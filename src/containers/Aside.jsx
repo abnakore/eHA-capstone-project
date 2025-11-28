@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./aside.css";
 import NavItem from "../components/NavItem";
 import { TbSmartHome } from "react-icons/tb";
@@ -8,7 +8,8 @@ import { FaFileMedical } from "react-icons/fa6";
 import { FaUserMd } from "react-icons/fa";
 import { FaChartLine } from "react-icons/fa6";
 import { IoLogOutOutline } from "react-icons/io5";
-import { RiSettingsFill } from "react-icons/ri";
+import { RiMenuFold3Line, RiSettingsFill } from "react-icons/ri";
+import { RiMenuUnfold3Line } from "react-icons/ri";
 import { useUser } from "../contexts/userContext";
 import { logOut } from "../data/data";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +19,8 @@ function Aside() {
   const navigate = useNavigate();
   // Get use data from context
   const { user } = useUser();
+
+  const [open, setOpen] = useState(false);
 
   // Navigation links data
   const navLinks = [
@@ -31,10 +34,13 @@ function Aside() {
     // { icon: <RiSettingsFill />, text: "Settings", to: "/settings" },
   ];
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${open ? "opened" : "closed"}`}>
       <div className="logo">
         <div className="logo-icon">HL</div>
         <div className="logo-text">HealthLog</div>
+        <i className="open-sidebar" onClick={() => setOpen(!open)}>
+          {open ? <RiMenuFold3Line /> : <RiMenuUnfold3Line />}
+        </i>
       </div>
 
       <div className="nav-links">
@@ -61,7 +67,7 @@ function Aside() {
           {/* <p>{user?.role}</p> */}
         </div>
         <i
-          className="user-avatar"
+          className="logout-icon"
           title="Log out"
           onClick={() => {
             logOut();

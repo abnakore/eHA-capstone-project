@@ -68,3 +68,10 @@
     font-size: 0.9rem;
     padding: 1rem;
 }
+
+@media (max-width: 800px) {
+    .content {
+        margin-left: 4rem;
+        padding: 2rem .3rem;
+    }
+}
