@@ -55,3 +55,15 @@
     margin-bottom: 15px;
     text-align: center;
 }
+
+@media (max-width: 500px) {
+
+    .signup-card {
+        padding: 2rem .5rem;
+    }
+
+    .form-row {
+        gap: 5px;
+    }
+
+}
