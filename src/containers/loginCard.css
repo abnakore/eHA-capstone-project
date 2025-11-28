@@ -48,3 +48,11 @@
     margin-bottom: 15px;
     text-align: center;
 }
+
+@media (max-width: 375px) {
+
+    .login-card {
+        padding: 2rem .5rem;
+    }
+
+}
