@@ -20,3 +20,10 @@
 .timeline-items {
     padding: 0;
 }
+
+.timeline .empty-message {
+    text-align: center;
+    color: var(--color-medium-gray);
+    font-size: 0.9rem;
+    padding: 1rem;
+}

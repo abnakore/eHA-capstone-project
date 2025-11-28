@@ -61,3 +61,10 @@
 .timeline-preview {
     margin-bottom: 2.5rem;
 }
+
+.timeline-preview .empty-message {
+    text-align: center;
+    color: var(--color-medium-gray);
+    font-size: 0.9rem;
+    padding: 1rem;
+}

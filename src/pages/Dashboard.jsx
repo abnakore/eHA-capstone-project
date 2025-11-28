@@ -23,89 +23,18 @@ function Dashboard() {
 
   // Medications data
   const { data: medications } = useFetch(() => getHealthRecords("Medication"));
-  // const medications = [
-  //   {
-  //     name: "Lisinopril",
-  //     dosage: "10mg daily",
-  //     status: "Active",
-  //     kind: "tablet",
-  //   },
-  //   {
-  //     name: "Metformin",
-  //     dosage: "500mg twice daily",
-  //     status: "Active",
-  //     kind: "injection",
-  //   },
-  //   {
-  //     name: "Atorvastatin",
-  //     dosage: "20mg at bedtime",
-  //     status: "Active",
-  //     kind: "syrup",
-  //   },
-  // ];
-
-  // Allergy data
 
   const { data: allergies } = useFetch(() =>
     getHealthRecords("Allergy_Report")
   );
-
-  // const allergies = [
-  //   { name: "Penicillin", level: "Severe" },
-  //   { name: "Shellfish", level: "Moderate" },
-  //   { name: "Ibuprofen", level: "Moderate" },
-  // ];
 
   // Current conditions data
   const { data: currentConditions } = useFetch(() =>
     getHealthRecords("Condition")
   );
 
-  // const currentConditions = [
-  //   { name: "Type 2 Diabetes", status: "Active" },
-  //   { name: "Hypertension", status: "Inactive" },
-  // ];
-
   // Health events data
   const { data: healthEvents } = useFetch(() => loadData("healthRecords"));
-  // const healthEvents = [
-  //   {
-  //     date: "Nov 10",
-  //     type: "lab",
-  //     title: "Lab Result",
-  //     description: "LDL: 95 mg/dL (Within normal range)",
-  //   },
-  //   {
-  //     date: "Nov 05",
-  //     type: "appointment",
-  //     title: "Doctor Appointment",
-  //     description: "Annual physical check-up with Dr. Smith.",
-  //   },
-  //   {
-  //     date: "Nov 01",
-  //     type: "medication",
-  //     title: "Medication Update",
-  //     description: "Started Metformin 500mg twice daily.",
-  //   },
-  //   {
-  //     date: "Nov 10",
-  //     type: "other",
-  //     title: "Lab Result",
-  //     description: "LDL: 95 mg/dL (Within normal range)",
-  //   },
-  //   {
-  //     date: "Nov 06",
-  //     type: "appointment",
-  //     title: "Doctor Appointment",
-  //     description: "Annual physical check-up with Dr. Smith.",
-  //   },
-  //   {
-  //     date: "Nov 09",
-  //     type: "medication",
-  //     title: "Medication Update",
-  //     description: "Started Metformin 500mg twice daily.",
-  //   },
-  // ];
 
   // !!! Prevent rendering if user is not loaded yet
   if (loading) {
@@ -179,23 +108,27 @@ function Dashboard() {
 
           <div className="card">
             {/* Reverse the array and take at most 5 events */}
-            {healthEvents
-              ?.reverse()
-              .slice(0, 5)
-              .map((event, index) => (
-                <TimelineItem
-                  key={index}
-                  date={formatDate(event.event_date)}
-                  type={event.record_type}
-                  title={
-                    event.title ||
-                    event.name ||
-                    event.allergenName ||
-                    event.imagingCenter
-                  }
-                  description={event.note}
-                />
-              ))}
+            {healthEvents.length > 0 ? (
+              healthEvents
+                ?.reverse()
+                .slice(0, 5)
+                .map((event, index) => (
+                  <TimelineItem
+                    key={index}
+                    date={formatDate(event.event_date)}
+                    type={event.record_type}
+                    title={
+                      event.title ||
+                      event.name ||
+                      event.allergenName ||
+                      event.imagingCenter
+                    }
+                    description={event.note}
+                  />
+                ))
+            ) : (
+              <p className="empty-message">No items available</p>
+            )}
           </div>
         </div>
       </div>
