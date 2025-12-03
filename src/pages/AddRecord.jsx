@@ -1,9 +1,12 @@
 import React from "react";
-import "./addRecord.css";
+
 import Aside from "../containers/Aside";
 import HealthRecordForm from "../containers/HealthRecordForm";
 import { useUser } from "../contexts/userContext";
+
 import { Navigate } from "react-router-dom";
+
+import "./addRecord.css";
 
 function AddRecord() {
   // Get data from context

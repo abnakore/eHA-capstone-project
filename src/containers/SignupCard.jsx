@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 
-import "./signupCard.css";
+import sha256 from "js-sha256";
+import { Link, useNavigate } from "react-router-dom";
 
-import { useUser } from "../contexts/userContext";
 import Input from "../components/Input";
 import Button from "../components/Button";
 import { loadData, logIn, saveData } from "../data/data";
-import { Link, useNavigate } from "react-router-dom";
-import sha256 from "js-sha256";
+import { useUser } from "../contexts/userContext";
+import "./signupCard.css";
 
 function SignupCard() {
   // use navigate for redirection
@@ -29,6 +29,7 @@ function SignupCard() {
     emergencyContact: "",
   });
 
+  // State hook for form errors
   const [errors, setErrors] = useState({});
 
   // Handle input changes
@@ -107,16 +108,17 @@ function SignupCard() {
         "Phone number format is invalid. Use +countrycode-number.";
     }
 
-    // Emergency contact validation (optional)
-
     return newErrors;
   };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validate form inputs
     const validationErrors = validate();
 
+    // If there are validation errors, set them and abort submission
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;

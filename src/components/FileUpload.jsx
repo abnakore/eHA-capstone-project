@@ -15,22 +15,27 @@ const FileUpload = ({
 }) => {
   const fileInputRef = useRef(null);
 
+  // Error state
   const [error, setError] = useState("");
 
+  // Handle file upload click
   const handleFileUploadClick = () => {
     fileInputRef.current.click();
   };
 
+  // Handle file input change
   const handleFileChange = (e) => {
     if (e.target.files.length) {
       handleFileSelection(e.target.files[0]);
     }
   };
 
+  // Handle drag over event
   const handleDragOver = (e) => {
     e.preventDefault();
   };
 
+  // Handle drop event
   const handleDrop = (e) => {
     e.preventDefault();
     setError("");
@@ -39,6 +44,7 @@ const FileUpload = ({
     }
   };
 
+  // Validate and handle file selection
   const handleFileSelection = (file) => {
     // Validate file type and size
     const validTypes = [
@@ -49,23 +55,26 @@ const FileUpload = ({
     ];
     const maxSize = maxFileSize;
 
+    // Validate file type
     if (!validTypes.includes(file.type)) {
       setError("Please select a PDF, JPG, or PNG file.");
       return;
     }
 
+    // Validate file size
     if (file.size > maxSize) {
       setError("File size must be less than 10MB.");
       return;
     }
 
+    // Add file
     onFileSelect(file);
   };
 
   return (
     <div className="form-section">
       <h3 className="section-title">
-        <i className="fas fa-file-upload"></i>
+        <IoIosCloudUpload />
         Document Attachment
       </h3>
 
@@ -75,7 +84,7 @@ const FileUpload = ({
         onDragOver={handleDragOver}
         onDrop={handleDrop}
       >
-        <i className="fas fa-cloud-upload-alt">
+        <i className="upload-icon">
           <IoIosCloudUpload />
         </i>
         <p>Drag & drop files here or click to browse</p>
@@ -90,6 +99,7 @@ const FileUpload = ({
       </div>
       {error && <div className="error-message">{error}</div>}
 
+      {/* File previews */}
       {selectedFiles &&
         selectedFiles.map((selectedFile, i) => (
           <div key={i} className="file-preview active">

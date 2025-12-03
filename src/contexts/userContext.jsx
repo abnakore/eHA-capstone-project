@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { loadData, saveData } from "../data/data";
+import { loadData } from "../data/data";
 
 const UserContext = createContext();
 
@@ -50,6 +50,7 @@ export const UserProvider = ({ children }) => {
   );
 };
 
+// Custom hook to use the UserContext
 export const useUser = () => {
   const context = useContext(UserContext);
   if (!context) {

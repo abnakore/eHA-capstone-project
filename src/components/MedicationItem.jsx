@@ -1,8 +1,8 @@
 import React from "react";
-import "./medicationItem.css";
 import { FaPills } from "react-icons/fa6";
 import { TbMedicineSyrup } from "react-icons/tb";
 import { BiSolidInjection } from "react-icons/bi";
+import "./medicationItem.css";
 
 function MedicationItem({ name, dosage, status, kind }) {
   return (

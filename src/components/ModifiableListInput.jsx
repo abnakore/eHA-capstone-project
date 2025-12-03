@@ -1,5 +1,4 @@
 import React, { useId, useState } from "react";
-import Button from "./Button";
 import { FaPlus } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import "./modifiableListInput.css";
@@ -17,48 +16,62 @@ const ModifiableListInput = ({
   // Set Id
   const id = useId();
 
+  // State for current input and error message
   const [currentItem, setCurrentItem] = useState("");
   const [error, setError] = useState("");
 
+  // Validation function
   const validateItem = (item) => {
+    // Check if item is empty
     if (!item.trim()) {
       return "Item cannot be empty";
     }
+
+    // Check max items
     if (maxItems && items.length >= maxItems) {
       return `Maximum ${maxItems} items allowed`;
     }
 
+    // Check for duplicate items
     if (items.includes(item) && !allowDuplicate) {
       return `Duplicate inputs`;
     }
 
     if (validation) {
+      // Call custom validation
       return validation(item);
     }
     return "";
   };
 
+  // Handle adding a new item
   const handleAddItem = (e) => {
     e.preventDefault();
 
+    // Validate the current item before adding
     const validationError = validateItem(currentItem);
     if (validationError) {
       setError(validationError);
       return;
     }
 
+    // Add the current item to the list
     const newItems = [...items, currentItem.trim()];
     handleItemsChange(newItems);
     setCurrentItem("");
     setError("");
   };
 
+  // Handle removing an item
   const handleRemoveItem = (index) => {
+    // Remove the item at the specified index
     const newItems = items.filter((_, i) => i !== index);
     handleItemsChange(newItems);
   };
 
+  // Handle key down event for Enter key
   const handleKeyDown = (e) => {
+    // Check if the pressed key is Enter and add the item
     if (e.key === "Enter") {
       e.preventDefault();
       handleAddItem(e);
@@ -66,6 +79,7 @@ const ModifiableListInput = ({
     }
   };
 
+  // Handle input change
   const handleInputChange = (e) => {
     setCurrentItem(e.target.value);
     if (error) {
@@ -77,6 +91,7 @@ const ModifiableListInput = ({
     <div className="modifiable-list-input">
       {label && <label className="form-label">{label}</label>}
 
+      {/* Input field and add button */}
       <div className="list-input-container">
         <div className="input-with-button">
           <input
@@ -107,6 +122,7 @@ const ModifiableListInput = ({
         )}
       </div>
 
+      {/* List of added items */}
       {items.length > 0 && (
         <div className="items-list">
           {items.map((item, index) => (

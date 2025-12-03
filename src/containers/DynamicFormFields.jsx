@@ -1,13 +1,7 @@
 import React from "react";
-// import VisitFields from "./form-types/VisitFields";
-// import MedicationFields from "./form-types/MedicationFields";
-// import LabFields from "./form-types/LabFields";
-// import ImagingFields from "./form-types/ImagingFields";
-// import AllergyFields from "./form-types/AllergyFields";
-// import ConditionFields from "./form-types/ConditionFields";
-import "./dynamicFormFields.css";
 import Input from "../components/Input";
 import ModifiableListInput from "../components/ModifiableListInput";
+import "./dynamicFormFields.css";
 
 const DynamicFormFields = ({
   recordType,
@@ -15,16 +9,9 @@ const DynamicFormFields = ({
   handleInputChange,
   updateFormField,
   errors,
-  currentReaction,
-  onReactionChange,
-  onReactionAdd,
-  onReactionRemove,
-  currentTrigger,
-  onTriggerChange,
-  onTriggerAdd,
-  onTriggerRemove,
 }) => {
   const renderFormFields = () => {
+    // Render fields based on record type
     switch (recordType) {
       case "Visit":
         return (
@@ -176,18 +163,6 @@ const DynamicFormFields = ({
         );
       case "Allergy_Report":
         return (
-          // <AllergyFields
-          //   formData={formData}
-          //   handleInputChange={handleInputChange}
-          //   currentReaction={currentReaction}
-          //   onReactionChange={onReactionChange}
-          //   onReactionAdd={onReactionAdd}
-          //   onReactionRemove={onReactionRemove}
-          //   currentTrigger={currentTrigger}
-          //   onTriggerChange={onTriggerChange}
-          //   onTriggerAdd={onTriggerAdd}
-          //   onTriggerRemove={onTriggerRemove}
-          // />
           <div className="form-grid">
             <Input
               title="Allergen Name"
@@ -246,8 +221,7 @@ const DynamicFormFields = ({
             />
 
             <Input
-              // !!! (keep empty if ongoing)
-              title="Last Reaction Date"
+              title="Last Reaction Date (leave blank if ongoing)"
               type="date"
               name="lastReactionDate"
               placeholder={""}
@@ -397,6 +371,7 @@ const DynamicFormFields = ({
 
   if (!recordType) return null;
 
+  // Render the dynamic form fields
   return <div className="dynamic-section active">{renderFormFields()}</div>;
 };
 

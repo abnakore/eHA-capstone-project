@@ -1,6 +1,6 @@
 import React from "react";
-import "./conditionItem.css";
 import { IoMdCall } from "react-icons/io";
+import "./conditionItem.css";
 
 function ConditionItem({ name, status }) {
   return (

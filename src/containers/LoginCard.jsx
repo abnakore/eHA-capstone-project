@@ -22,6 +22,7 @@ function LoginCard() {
     password: "",
   });
 
+  // State hook for form errors
   const [errors, setErrors] = useState({});
 
   // Validation function
@@ -56,7 +57,7 @@ function LoginCard() {
     return () => clearTimeout(timeoutId);
   }, [formData]);
 
-  // Handle login logic here
+  // Handle login logic
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -68,19 +69,6 @@ function LoginCard() {
     }
 
     setErrors({});
-    // Proceed with login logic (e.g., API call)
-    // const usersData = (await loadData("users")) || [];
-
-    // const existingUser = usersData.find(
-    //   (user) =>
-    //     user.email === formData.email &&
-    //     user.password === sha256(formData.password)
-    // );
-
-    // if (!existingUser) {
-    //   setErrors({ form: "Invalid email or password." });
-    //   return;
-    // }
 
     try {
       const existingUser = await logIn(formData.email, formData.password);

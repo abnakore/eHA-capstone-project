@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import "./aside.css";
-import NavItem from "../components/NavItem";
+import { useNavigate } from "react-router-dom";
+
 import { TbSmartHome } from "react-icons/tb";
 import { LuHistory } from "react-icons/lu";
-import { FaPills, FaPlus } from "react-icons/fa6";
-import { FaFileMedical } from "react-icons/fa6";
-import { FaUserMd } from "react-icons/fa";
-import { FaChartLine } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6";
 import { IoLogOutOutline } from "react-icons/io5";
 import { RiMenuFold3Line, RiSettingsFill } from "react-icons/ri";
 import { RiMenuUnfold3Line } from "react-icons/ri";
+
 import { useUser } from "../contexts/userContext";
 import { logOut } from "../data/data";
-import { useNavigate } from "react-router-dom";
+import NavItem from "../components/NavItem";
+
+import "./aside.css";
 
 function Aside() {
   // use navigate for redirection
@@ -27,12 +27,8 @@ function Aside() {
     { icon: <TbSmartHome />, text: "Dashboard", to: "/dashboard" },
     { icon: <LuHistory />, text: "Timeline", to: "/timeline" },
     { icon: <FaPlus />, text: "Add Record", to: "/add-record" },
-    // { icon: <FaPills />, text: "Medications", to: "/medications" },
-    // { icon: <FaFileMedical />, text: "Documents", to: "/documents" },
-    // { icon: <FaUserMd />, text: "Appointments", to: "/appointments" },
-    // { icon: <FaChartLine />, text: "Health Metrics", to: "/health-metrics" },
-    // { icon: <RiSettingsFill />, text: "Settings", to: "/settings" },
   ];
+
   return (
     <div className={`sidebar ${open ? "opened" : "closed"}`}>
       <div className="logo">
@@ -64,7 +60,6 @@ function Aside() {
           <h4>
             {user?.firstName} {user?.lastName}
           </h4>
-          {/* <p>{user?.role}</p> */}
         </div>
         <i
           className="logout-icon"

@@ -1,3 +1,4 @@
+// Data management functions using local storage
 import { sha256 } from "js-sha256";
 
 export const saveData = async (key, value) => {
@@ -26,12 +27,10 @@ export const getHealthRecords = async (record_type) => {
 };
 
 export const logIn = async (email, password) => {
-  // Login user
+  // Load users data
   const usersData = (await loadData("users")) || [];
-  console.log("====================================");
-  console.log(usersData);
-  console.log("====================================");
 
+  // Find user with matching email and password
   const existingUser = usersData.find(
     (user) => user.email === email && user.password === sha256(password)
   );

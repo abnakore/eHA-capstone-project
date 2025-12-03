@@ -7,7 +7,6 @@ function AllergyItem({ name, level }) {
       <div className="allergy-details">
         <p className="allergy-name">{name}</p>
       </div>
-      {/* level */}
       <div className={`allergy-level severity-${level.toLowerCase()}`}>
         {level}
       </div>

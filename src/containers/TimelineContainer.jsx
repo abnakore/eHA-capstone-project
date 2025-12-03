@@ -1,24 +1,27 @@
 import React from "react";
-import "./timelineContainer.css";
 import TimelineItem from "../components/TimelineItem";
 import { formatDate, groupByMonth } from "../scripts/functions";
 import { useFetch } from "../hooks/useFetch";
 import { loadData } from "../data/data";
+import "./timelineContainer.css";
 
 function TimelineContainer() {
+  // Fetch health records data
   const { data: records } = useFetch(() => loadData("healthRecords"));
 
+  // Group records by month
   const recordsByMonth = groupByMonth(records || []);
 
   return (
-    <div class="timeline-container">
+    <div className="timeline-container">
       {/* <!-- Timeline --> */}
-      <div class="timeline">
+      <div className="timeline">
+        {/* Render timeline months and items */}
         {recordsByMonth?.length > 0 ? (
           recordsByMonth.map((month, i) => (
             <>
-              <div class="timeline-month">{month.month}</div>
-              <div class="timeline-items">
+              <div className="timeline-month">{month.month}</div>
+              <div className="timeline-items">
                 {month.records.map((record) => (
                   <TimelineItem
                     key={record.record_id}
@@ -32,29 +35,29 @@ function TimelineContainer() {
                     }
                     description={record.note}
                   />
-                  // <div class="timeline-item">
-                  //   <div class="timeline-date">
-                  //     <div class="timeline-day">10</div>
-                  //     <div class="timeline-month-year">Nov 2025</div>
+                  // <div className="timeline-item">
+                  //   <div className="timeline-date">
+                  //     <div className="timeline-day">10</div>
+                  //     <div className="timeline-month-year">Nov 2025</div>
                   //   </div>
-                  //   <div class="timeline-content">
-                  //     <div class="timeline-type type-lab">Lab Result</div>
-                  //     <h3 class="timeline-title">Cholesterol Panel</h3>
-                  //     <p class="timeline-description">
+                  //   <div className="timeline-content">
+                  //     <div className="timeline-type type-lab">Lab Result</div>
+                  //     <h3 className="timeline-title">Cholesterol Panel</h3>
+                  //     <p className="timeline-description">
                   //       LDL: 95 mg/dL (Within normal range), HDL: 52 mg/dL,
                   //       Triglycerides: 120 mg/dL
                   //     </p>
-                  //     <div class="timeline-meta">
+                  //     <div className="timeline-meta">
                   //       <span>
-                  //         <i class="fas fa-hospital"></i> City Medical Lab
+                  //         <i className="fas fa-hospital"></i> City Medical Lab
                   //       </span>
-                  //       <a href="#" class="timeline-attachment">
-                  //         <i class="fas fa-paperclip"></i> Lab_Report_Nov10.pdf
+                  //       <a href="#" className="timeline-attachment">
+                  //         <i className="fas fa-paperclip"></i> Lab_Report_Nov10.pdf
                   //       </a>
                   //     </div>
-                  //     <div class="timeline-actions">
-                  //       <button class="action-btn">View Details</button>
-                  //       <button class="action-btn">Download</button>
+                  //     <div className="timeline-actions">
+                  //       <button className="action-btn">View Details</button>
+                  //       <button className="action-btn">Download</button>
                   //     </div>
                   //   </div>
                   // </div>

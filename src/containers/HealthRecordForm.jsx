@@ -1,9 +1,4 @@
 import React, { useState } from "react";
-// import RecordTypeSelector from "./RecordTypeSelector";
-// import BasicInfoSection from "./BasicInfoSection";
-// import DynamicFormSection from "./DynamicFormSection";
-// import FileUploadSection from "./FileUploadSection";
-import RecordTypeCard from "../components/RecordTypeCard";
 
 import { FaUserMd, FaAllergies, FaRedo, FaSave } from "react-icons/fa";
 import {
@@ -16,11 +11,14 @@ import {
 import { PiFlaskFill } from "react-icons/pi";
 
 import Input from "../components/Input";
-import DynamicFormFields from "./DynamicFormFields";
-import "./healthRecordForm.css";
-import FileUpload from "../components/FileUpload";
-import { saveData, loadData } from "../data/data";
 import Button from "../components/Button";
+import RecordTypeCard from "../components/RecordTypeCard";
+import DynamicFormFields from "./DynamicFormFields";
+import FileUpload from "../components/FileUpload";
+
+import { saveData, loadData } from "../data/data";
+
+import "./healthRecordForm.css";
 
 const HealthRecordForm = ({}) => {
   // Record types
@@ -81,7 +79,6 @@ const HealthRecordForm = ({}) => {
   // Errors
   const [errors, setErrors] = useState({});
 
-  // !!! use useReducer
   const [currentReaction, setCurrentReaction] = useState("");
   const [currentTrigger, setCurrentTrigger] = useState("");
 
@@ -122,40 +119,6 @@ const HealthRecordForm = ({}) => {
     setSelectedFiles((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleReactionAdd = () => {
-    if (currentReaction.trim()) {
-      setFormData((prev) => ({
-        ...prev,
-        reactions: [...prev.reactions, currentReaction.trim()],
-      }));
-      setCurrentReaction("");
-    }
-  };
-
-  const handleReactionRemove = (index) => {
-    setFormData((prev) => ({
-      ...prev,
-      reactions: prev.reactions.filter((_, i) => i !== index),
-    }));
-  };
-
-  const handleTriggerAdd = () => {
-    if (currentTrigger.trim()) {
-      setFormData((prev) => ({
-        ...prev,
-        knownTriggers: [...prev.knownTriggers, currentTrigger.trim()],
-      }));
-      setCurrentTrigger("");
-    }
-  };
-
-  const handleTriggerRemove = (index) => {
-    setFormData((prev) => ({
-      ...prev,
-      knownTriggers: prev.knownTriggers.filter((_, i) => i !== index),
-    }));
-  };
-
   // Form validation
   const validateForm = () => {
     const newErrors = {};
@@ -183,14 +146,17 @@ const HealthRecordForm = ({}) => {
     // Type-specific validations
     switch (formData.record_type) {
       case "Visit":
+        // Doctor is required
         if (!formData.doctor.trim()) {
           newErrors.doctor = "Visit doctor is required";
         }
+        // Location is required
         if (!formData.location.trim()) {
           newErrors.location = "Visit location is required";
         }
         break;
       case "Medication":
+        // medicationName, dosage, frequency, prescribingDoctor are required
         if (!formData.medicationName.trim())
           newErrors.medicationName = "Medication name is required";
         if (!formData.dosage.trim())
@@ -207,10 +173,12 @@ const HealthRecordForm = ({}) => {
 
         break;
       case "Lab":
+        // labName is required
         if (!formData.labName.trim())
           newErrors.labName = "Lab name is required";
         break;
       case "Imaging":
+        // imagingType, bodyPart, imagingCenter are required
         if (!formData.imagingType.trim())
           newErrors.imagingType = "Imaging type is required";
         if (!formData.bodyPart.trim())
@@ -219,9 +187,11 @@ const HealthRecordForm = ({}) => {
           newErrors.imagingCenter = "Imaging center is required";
         break;
       case "Allergy_Report":
+        // allergenName, firstReactionDate, lastReactionDate are required
         if (!formData.allergenName.trim())
           newErrors.allergenName = "Allergen name is required";
 
+        // firstReactionDate is required and cannot be in the future
         if (!formData.firstReactionDate) {
           newErrors.firstReactionDate =
             "First reaction date is required. (If you could'nt remember, give an approximate)";
@@ -230,6 +200,7 @@ const HealthRecordForm = ({}) => {
             "First reaction date cannot be in the future";
         }
 
+        // Last reaction date should not be before first reaction date if both are provided
         if (formData.firstReactionDate && formData.lastReactionDate) {
           if (
             new Date(formData.firstReactionDate) >
@@ -241,10 +212,13 @@ const HealthRecordForm = ({}) => {
         }
         break;
       case "Condition":
+        // conditionName, diagnosedBy are required
         if (!formData.conditionName.trim())
           newErrors.conditionName = "Condition name is required";
         if (!formData.diagnosedBy.trim())
           newErrors.diagnosedBy = "Condition diagnosed by is required";
+
+        // dateOfDiagnosis is not required but if provided, cannot be in the future
         if (
           formData.dateOfDiagnosis &&
           new Date(formData.dateOfDiagnosis) > new Date()
@@ -283,7 +257,7 @@ const HealthRecordForm = ({}) => {
         ...(selectedFiles.length > 0 && {
           documents: selectedFiles.map((file) => ({
             file_name: file.name,
-            storage_path: `/mock/user-001/doc-${Date.now()}-${file.name}`,
+            storage_path: `/test-path/user-001/doc-${Date.now()}-${file.name}`,
           })),
         }),
       };
@@ -340,7 +314,6 @@ const HealthRecordForm = ({}) => {
       // Append the newRecord to the existing records in local storage
       existingRecords.push(recordData);
       // Call the saveData function
-      console.log(recordData, existingRecords);
       await saveData("healthRecords", existingRecords);
 
       // Reset form
@@ -384,6 +357,7 @@ const HealthRecordForm = ({}) => {
         conditionSeverity: "mild",
       });
 
+      // Reset selected files and current inputs for reactions and triggers
       setSelectedFiles([]);
       setCurrentReaction("");
       setCurrentTrigger("");
@@ -562,24 +536,17 @@ const HealthRecordForm = ({}) => {
               handleInputChange={handleInputChange}
               updateFormField={updateFormField}
               errors={errors}
-              // Remove below props
-              currentReaction={currentReaction}
-              onReactionChange={setCurrentReaction}
-              onReactionAdd={handleReactionAdd}
-              onReactionRemove={handleReactionRemove}
-              currentTrigger={currentTrigger}
-              onTriggerChange={setCurrentTrigger}
-              onTriggerAdd={handleTriggerAdd}
-              onTriggerRemove={handleTriggerRemove}
             />
           </div>
 
+          {/* File Upload Section */}
           <FileUpload
             selectedFiles={selectedFiles}
             onFileSelect={handleFileSelect}
             onFileRemove={handleFileRemove}
           />
 
+          {/* Form Actions */}
           <div className="form-actions">
             <Button
               title={"Reset Form"}

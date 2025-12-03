@@ -1,6 +1,6 @@
 import React from "react";
-import "./navitem.css";
 import { Link } from "react-router-dom";
+import "./navitem.css";
 
 function NavItem({ icon, text, active, to }) {
   return (

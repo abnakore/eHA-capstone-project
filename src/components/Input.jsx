@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./input.css";
 import { LuEye, LuEyeClosed } from "react-icons/lu";
+import "./input.css";
 
 function Input({
   title,
@@ -13,11 +13,14 @@ function Input({
   error,
   options,
 }) {
+  // Password visibility state
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className={`form-group ${error ? "has-error" : ""}`}>
       <label htmlFor={name}>{title}</label>
+
+      {/* Input field based on type */}
       {type === "textarea" ? (
         <textarea
           name={name}
@@ -35,7 +38,9 @@ function Input({
           required={required}
         >
           {options.map((option) => (
-            <option key={option.value} value={option.value}>{option.label}</option>
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
           ))}
         </select>
       ) : (
@@ -49,6 +54,7 @@ function Input({
         />
       )}
 
+      {/* Password visibility toggle */}
       {type === "password" ? (
         <i
           className="right-icon"
@@ -60,6 +66,8 @@ function Input({
           {showPassword ? <LuEyeClosed /> : <LuEye />}
         </i>
       ) : null}
+
+      {/* Error message */}
       {error && <span className="error-message">{error}</span>}
     </div>
   );

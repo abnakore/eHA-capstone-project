@@ -5,7 +5,7 @@ This project helps users store, manage, and access their essential medical infor
 
 ---
 
-## 🚀 **Project Overview**
+## 🚀 **Project Overview/Summary**
 
 The Health Log web app allows users to:
 
@@ -13,7 +13,7 @@ The Health Log web app allows users to:
 - Store key health information such as allergies, medications and conditions
 - View all their uploads and entries on a **unified chronological timeline**
 - Access quick critical info through a **dashboard-style overview**
-- Manage their health data securely with user authentication
+- Manage their health data securely with user authentication (localStorage)
 
 The goal is to provide a simple digital solution for people who often lose track of scattered medical documents and need a unified place to manage them.
 
@@ -82,6 +82,20 @@ npm install
 # Start development server
 npm run dev
 ```
+
+---
+
+### Test Login Instructions
+
+This project uses localStorage for saving user accounts.  
+Because of this, each reviewer needs to create their own login.
+
+1. Click “New User? Sign Up” on the login page.
+2. Create a new account.
+3. Your account will be stored in your browser using localStorage.
+4. After signup, you can log in anytime with the same details.
+
+No pre-created test account is required.
 
 ---
 

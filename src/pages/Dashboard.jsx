@@ -1,5 +1,4 @@
 import React from "react";
-import "./dashboard.css";
 
 import { Link, Navigate } from "react-router-dom";
 import { useUser } from "../contexts/userContext";
@@ -8,14 +7,16 @@ import Aside from "../containers/Aside";
 import CriticalCard from "../containers/CriticalCard";
 import MedicationItem from "../components/MedicationItem";
 import AllergyItem from "../components/AllergyItem";
+import TimelineItem from "../components/TimelineItem";
 
 import { FaPills } from "react-icons/fa6";
 import { FaAllergies } from "react-icons/fa";
 import { MdSick } from "react-icons/md";
-import TimelineItem from "../components/TimelineItem";
+
 import { getHealthRecords, loadData } from "../data/data";
 import { useFetch } from "../hooks/useFetch";
 import { formatDate } from "../scripts/functions";
+import "./dashboard.css";
 
 function Dashboard() {
   // get user from context
@@ -24,6 +25,7 @@ function Dashboard() {
   // Medications data
   const { data: medications } = useFetch(() => getHealthRecords("Medication"));
 
+  // Allergies data
   const { data: allergies } = useFetch(() =>
     getHealthRecords("Allergy_Report")
   );

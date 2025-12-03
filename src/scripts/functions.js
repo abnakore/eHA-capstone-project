@@ -1,3 +1,4 @@
+// Group records by month based on 'event_date' field
 export const groupByMonth = (records) => {
   const groups = {};
 
@@ -26,7 +27,7 @@ export const groupByMonth = (records) => {
   }));
 };
 
-// 2025-11-22  ->  Nov 22
+// Format date string to "Mon DD" 2025-11-22  ->  Nov 22
 export const formatDate = (date_str) => {
   const date = new Date(date_str);
 

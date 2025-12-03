@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { RiEdit2Fill, RiCloseFill } from "react-icons/ri";
 import { FaMinus, FaPlus } from "react-icons/fa6";
+
 import "./criticalCard.css";
 
 function CriticalCard({ icon, title, items }) {
