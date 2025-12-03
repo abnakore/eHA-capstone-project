@@ -121,6 +121,12 @@ Feel free to fork the repo and submit a pull request.
 
 ---
 
+## 🙏 Acknowledgements
+This project was developed as part of the eHealth Africa React Training Program.  
+The UI design and color inspiration were derived from eHealth Africa’s branding style to maintain a clean, health-focused user experience.
+
+---
+
 ## 📄 **License**
 
 This project is open-source and available for educational use.
